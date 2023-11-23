@@ -25,20 +25,31 @@ class Baseline_first:
     
 class Coordinate:
     def __init__(self, N:int):
-        self.N = N
-        self.array_3d = self.integrate_process()
+        self.N = 4096
+        array_3d = [self.integrate_process(1)]
+        repeat_time = self.N//2+1 if self.N < 256 else int(129-(129/1000)*(self.N-256))
+        repeat_time = 5 if repeat_time < 5 else repeat_time
+        print(repeat_time)
+        for move_length in range(2, repeat_time):
+            array_2d = self.integrate_process(move_length)
+            array_3d.append(array_2d)
+            array_2d = self.integrate_process(-1*move_length)
+            array_3d.insert(0,array_2d)
+        self.array_3d = array_3d
+        print(len(self.array_3d))
 
-    def create_3d_array(self):
-        n = self.N
-        array_3d = [[(i, j) for j in range(n)] for i in range(n)]
-        return array_3d
+    def create_2d_array(self,size:int):
+        n = size
+        le = self.move_length
+        array_2d = [[(le, i, j) for j in range(n)] for i in range(n)]
+        return array_2d
     
     def first_process(self, input_array):   #同じ要素を持つタプルを削除
         co = input_array.copy()
         for i in range(len(co)-1):
             flag = 0
             for j in range(len(co[i]) - 1, -1, -1):
-                if co[i][j][0] == co[i][j][1]:
+                if co[i][j][1] == co[i][j][2]:
                     co[i][j] = co[i+1][j]
                     flag = 1
                 elif flag == 1:
@@ -49,15 +60,35 @@ class Coordinate:
         co = input_array.copy()
         for i in range(len(co)):
             for j in range(len(co[i])-1):
-                if co[i][j][0] - co[i][j][1] == 1:
+                if co[i][j][1] - co[i][j][2] == 1:
                     co[i].remove(co[i][j])
         return co
 
-    def integrate_process(self):
-        array1 = self.create_3d_array()
-        array2 = self.first_process(array1)
-        array3 = self.second_process(array2)
-        return array3
+    def integrate_process(self,move_length):
+        if move_length == 1:
+            self.move_length = move_length
+            print("aaa")
+            array1 = self.create_2d_array(self.N)
+            print("bbb")
+            array2 = self.first_process(array1)
+            print("ccc")
+            array3 = self.second_process(array2)
+            print("ddd")
+            return array3
+        elif move_length > 1:
+            self.move_length = move_length
+            array1 = self.create_2d_array(self.N-move_length+2)
+            array2 = self.first_process(array1)
+            for row in array2:
+                row.pop()
+            return array2
+        elif move_length < 0:
+            self.move_length = move_length
+            move_length = -1 * move_length
+            array1 = self.create_2d_array(self.N-move_length+2)
+            for row in array1:
+                row.pop()
+            return array1
 
 class Swap:
     def __init__(self, array_3d:list, baseline_tour:list, dist:list):
@@ -65,7 +96,7 @@ class Swap:
         self.array_3d = array_3d
         self.dist = dist
 
-    def insert_at_position(self, lst:list, remove_position:int, insert_position:int)->list:
+    def insert_at_position(self, lst:list, remove_position:int, insert_position:int, remove_length:int)->list:
         lst_copy = lst.copy()
         assert remove_position != insert_position
         # 先頭要素を取得
@@ -116,19 +147,20 @@ class Tour:
 
     def box(self):
         self.box_width = 10**(-self.box_order)
-        horizontal_under = self.random_number[0] - self.box_width/2
-        horizontal_upper = self.random_number[0] + self.box_width/2
-        vertical_under = self.random_number[1] - self.box_width/2
-        vertical_upper = self.random_number[1] + self.box_width/2
-        if horizontal_under < 0:
-            horizontal_under = 0
-        if horizontal_upper > 1:
-            horizontal_upper = 1
-        if vertical_under < 0:
-            vertical_under = 0
-        if vertical_upper > 1:
-            vertical_upper = 1
-        return [[horizontal_under, horizontal_upper], [vertical_under, vertical_upper]]
+        x_under = self.random_number[0] - self.box_width/2
+        x_upper = self.random_number[0] + self.box_width/2
+        y_under = self.random_number[1] - self.box_width/2
+        y_upper = self.random_number[1] + self.box_width/2
+        z_under = self.random_number[2] - self.box_width/2
+        z_upper = self.random_number[2] + self.box_width/2
+        x_under = 0 if x_under < 0 else x_under
+        x_upper = 1 if x_upper > 1 else x_upper
+        y_under = 0 if y_under < 0 else y_under
+        y_upper = 1 if y_upper > 1 else y_upper
+        z_under = 0 if z_under < 0 else z_under
+        z_upper = 1 if z_upper > 1 else z_upper
+
+        return [[x_under, x_upper], [y_under, y_upper],[z_under, z_upper]]
 
 class Search_in_same_baseline:
     def __init__(self, baseline_tour:Tour):
@@ -139,13 +171,13 @@ class Search_in_same_baseline:
         self.baseline_order = baseline_tour.order
         self.baseline_order_length = calculate_total_distance(dist, self.baseline_order)
         self.N = len(set(self.baseline_order))
-        self.array_3d = self.create_3d_array()
+        self.array_3d = array_3d
         self.swap = Swap(self.array_3d, self.baseline_order, dist)
         # self.from_top = self.search_all(self.baseline_tour)
         self.search_times = 100
 
-    def create_3d_array(self):
-        return Coordinate(self.N).array_3d
+    # def create_3d_array(self):
+    #     return Coordinate(self.N).array_3d
     
     def plot_sobol_points(self, num_points, box_range:list):
         # 二次元平面にSobol乱数を生成
@@ -289,7 +321,7 @@ class Different_first_baseline:
     def search(self):
         tours_all = []
         start_time = time.time()
-        search_city_num = self.N//10
+        search_city_num = self.N//5
         for start in range(search_city_num):
             baseline = Baseline_first(self.file_number, self.dist, self.short_path, start)
             first_baseline_tour = Tour(baseline.distance, baseline.baseline_tour, [0.5, 0.5], 0)
@@ -311,15 +343,20 @@ class Different_first_baseline:
 # 円環座標で探索する
 
 if __name__ == '__main__':
-    file_num = 4
+    file_num = 0
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
     short_path = cal_shortpath(dist)
+    print("あああ")
+    array_3d = Coordinate(len(cities)).array_3d
+    print("いいい")
     search_times = 100
     already_baseline_length = set()
 
     dodo = Different_first_baseline(file_num, dist, short_path)
     top3 = dodo.search()
+
+    print("あああああ",top3)
     last_1 = Search_in_same_baseline(top3[0]).search_all()[0]
     top1_length = last_1.length
     print(f"最短経路は...:{top1_length}")
@@ -330,27 +367,3 @@ if __name__ == '__main__':
     with open(f'../GoogleTSP/google-step-tsp/output_{file_num}.csv', 'w') as f:
         f.write(format_tour(last_1.order) + '\n')
 
-"""
-    x1 = np.array([0.0, 1.0])
-    x2 = np.array([0.0, 1.0])
-    x = (x1, x2)
-    result = gp_minimize(bayse_tsp, x, 
-                          acq_func="EI",
-                          n_calls=310,
-                          n_initial_points = 300,
-                          noise=0.0,
-                          model_queue_size=1,
-                          verbose=True,
-                        #   xi=0.000000001,
-                        #   callback=plot_heatmap,
-                          n_points=75
-                        )
-
-    print(result)
-    print(f"元の経路の距離：{distance}")
-    print(f"最適な経路の距離：{result.fun}")
-    # print(f"最適なx:{result.x}")
-    coordinates = result.x_iters
-    values = result.func_vals
-    plot_heatmap(coordinates, values, num_cities)
-"""
