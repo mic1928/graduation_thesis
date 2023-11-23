@@ -35,7 +35,7 @@ def cal_dist(cities):
             dist[i][j] = dist[j][i] = distance(cities[i], cities[j])
     return dist
 
-def sort_indices_by_values(matrix):
+def cal_shortpath(matrix):
     sorted_indices_matrix = []
     
     for row in matrix:
@@ -122,12 +122,8 @@ def two_opt(tour, dist, short_path):
             index_spot = short_path[spot1].index(spot1_end)
             j_array = short_path[spot1][:index_spot]
             for i_ in range(i+2):
-                # if j_array is None:
-                #     break
                 if tour[i_] in j_array:
                     j_array.remove(tour[i_])
-            # j_array = [] if j_array is None else j_array
-            # print(short_path[spot1],spot1,spot1_end, j_array)
             for j in j_array:
                 spot2 = j
                 j = tour.index(j)
@@ -144,7 +140,7 @@ def two_opt(tour, dist, short_path):
 
 
 
-def optimal_tour(distance_matrix, cities:list, startpoint:int=None):
+def optimal_tour(distance_matrix, cities:list, short_path:list, startpoint:int=None):
     N = len(cities)
     if startpoint is None:
         random.seed(42)  # ランダムシードを42に設定
@@ -152,8 +148,8 @@ def optimal_tour(distance_matrix, cities:list, startpoint:int=None):
     
     spanning_tree = minimum_spanning_tree(distance_matrix, startpoint, N) #最小全域木を生成
     two_ap_tour = tsp_approximation(spanning_tree, startpoint) #2近似アルゴリズム
-    lap_time = time.time()
-    print(f"2近似アルゴリズム計算時間:{lap_time-start_time}")
+    # lap_time = time.time()
+    # print(f"2近似アルゴリズム計算時間:{lap_time-start_time}")
     two_opt_tour = two_opt(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
     return two_opt_tour
     # return two_ap_tour

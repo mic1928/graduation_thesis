@@ -1,14 +1,15 @@
-from week6_haruo_3d import read_input, cal_dist, optimal_tour, calculate_total_distance, format_tour, distance
+from week6_haruo_3d import read_input, cal_dist, optimal_tour, calculate_total_distance, format_tour, distance, cal_shortpath
+
 # from solver_greedy import solve
 import time
 import math
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-# from quasimc.sobol import Sobol
+from quasimc.sobol import Sobol
 
 class Baseline_first:
-    def __init__(self, file_number:int, first_point:int=0 ,baseline_tour:list=None, dist:list=None):
+    def __init__(self, file_number:int, first_point:int=0 ,baseline_tour:list=None, dist:list=None, short_path:list=None):
         self.file_number = file_number
         self.first_point = first_point
         if baseline_tour is None:
@@ -16,19 +17,20 @@ class Baseline_first:
         else:
             self.baseline_tour = baseline_tour
             self.dist = dist
+            self.short_path = short_path
             self.num_cities = len(set(baseline_tour))
             self.distance = calculate_total_distance(self.dist, self.baseline_tour)
 
-    def calculate_baseline_tour(self, cities, dist):
-        res_tour = optimal_tour(dist, cities, self.first_point)
+    def calculate_baseline_tour(self, cities, dist, short_path):
+        res_tour = optimal_tour(dist, cities, short_path, self.first_point)
         distance = calculate_total_distance(dist,res_tour)
         return res_tour,distance
 
     def read_city_information(self):
         cities = read_input(f'input/input_{self.file_number}.csv')
         dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
-
-        baseline_tour,distance = self.calculate_baseline_tour(cities, dist)
+        short_path = cal_shortpath(dist)
+        baseline_tour,distance = self.calculate_baseline_tour(cities, dist, short_path)
         print(f"総距離：{distance}")
         num_cities = len(set(baseline_tour))
         # print(f"都市数：{num_cities}")
@@ -323,19 +325,21 @@ if __name__ == '__main__':
     file_num = 4
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
+    short_path = cal_shortpath(dist)
     search_times = 100
     already_baseline_length = set()
 
     dodo = Different_first_baseline(file_num)
     top3 = dodo.search()
-    top1_length = Search_in_same_baseline(top3[0]).search_all()[0].length
+    last_1 = Search_in_same_baseline(top3[0]).search_all()[0]
+    top1_length = last_1.length
     print(f"最短経路は...:{top1_length}")
     for tour in top3:
         print(tour.length)
     top3.sort(key=lambda x: x.length)
     top_order = top3.copy()[0].order
     with open(f'../GoogleTSP/google-step-tsp/output_{file_num}.csv', 'w') as f:
-        f.write(format_tour(top_order) + '\n')
+        f.write(format_tour(last_1.order) + '\n')
 
 """
     x1 = np.array([0.0, 1.0])
