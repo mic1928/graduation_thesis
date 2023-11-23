@@ -12,37 +12,14 @@ class Baseline_first:
     def __init__(self, file_number:int, dist:list, short_path:list, first_point:int=0 ,baseline_tour:list=None):
         self.file_number = file_number
         self.first_point = first_point
-        # self.dist = dist
-        # self.short_path = short_path
         self.num_cities = len(dist)
         self.calculate_baseline_tour()
-        # if baseline_tour is None:
-        #     self.baseline_tour, self.distance = self.read_city_information()
-        # else:   #想定しない
-        #     self.baseline_tour = baseline_tour
-        #     self.dist = dist
-        #     self.short_path = short_path
-        #     self.num_cities = len(set(baseline_tour))
-        #     self.distance = calculate_total_distance(self.dist, self.baseline_tour)
 
     def calculate_baseline_tour(self):
-        # res_tour = optimal_tour(self.dist, self.short_path, self.first_point)
-        # distance = calculate_total_distance(self.dist,res_tour)
         res_tour = optimal_tour(dist, short_path, self.first_point)
         distance = calculate_total_distance(dist,res_tour)
         self.baseline_tour = res_tour
         self.distance = distance
-        # return res_tour,distance
-
-    # def read_city_information(self):
-    #     # cities = read_input(f'input/input_{self.file_number}.csv')
-    #     # dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
-    #     # short_path = cal_shortpath(dist)
-    #     baseline_tour,distance = self.calculate_baseline_tour(dist, short_path)
-    #     print(f"総距離：{distance}")
-    #     num_cities = len(set(baseline_tour))
-    #     # print(f"都市数：{num_cities}")
-    #     return baseline_tour, dist, num_cities, distance
     
 class Coordinate:
     def __init__(self, N:int):
