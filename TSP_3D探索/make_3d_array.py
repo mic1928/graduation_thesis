@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import json
 
 
 # class Coordinate:
@@ -145,8 +146,11 @@ if __name__ == '__main__':
     # dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
     # short_path = cal_shortpath(dist)
     # print("あああ")
-    start_time = time.time()
-    array_3d = Coordinate(500).array_3d
-    # print(type(array_3d[0]))
-    end_time = time.time()
-    print(f"計算時間:{end_time-start_time}")
+    for i in [64,128,256,512,1024,2048,4096,8192]:
+        start_time = time.time()
+        array_3d = Coordinate(i).array_3d
+        # JSONファイルに書き込む
+        with open(f'array_3d/3d_{i}.json', 'w+') as json_file:
+            json.dump(array_3d, json_file, indent=2)
+        end_time = time.time()
+        print(f"都市数{i}の計算時間:{end_time-start_time}")
