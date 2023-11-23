@@ -129,7 +129,6 @@ def two_opt_update(tour, dist, short_path):
                 spot2 = j
                 j = tour.index(j)
                 spot2_end = tour[j + 1]
-
                 if (dist[spot1][spot1_end] + dist[spot2][spot2_end]) > (dist[spot1][spot2] + dist[spot1_end][spot2_end]):
                     tour = tour[:i+1] + list(reversed(tour[i+1:j+1])) + tour[j+1:]
                     changed = True
@@ -174,8 +173,8 @@ def optimal_tour(distance_matrix, short_path:list, startpoint:int=None):
     two_ap_tour = tsp_approximation(spanning_tree, startpoint) #2近似アルゴリズム
     # lap_time = time.time()
     # print(f"2近似アルゴリズム計算時間:{lap_time-start_time}")
-    two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
-    # two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
+    # two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
+    two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
     return two_opt_tour
     # return two_ap_tour
 
