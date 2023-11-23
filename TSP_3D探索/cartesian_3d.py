@@ -18,126 +18,147 @@ class Baseline_first:
         self.calculate_baseline_tour()
 
     def calculate_baseline_tour(self):
-        res_tour = optimal_tour(self.dist, self.short_path, self.first_point)
+        res_tour = optimal_tour(self.dist, self.first_point, self.short_path)
         distance = calculate_total_distance(self.dist,res_tour)
         self.baseline_tour = res_tour
         self.distance = distance
     
-class Coordinate:
-    def __init__(self, N:int):
-        self.N = 5
-        array_3d = [self.integrate_process(1)]
-        repeat_time = self.N//2+1 if self.N < 256 else int(129-(129/1000)*(self.N-256))
-        repeat_time = 5 if repeat_time < 5 else repeat_time
-        print(repeat_time)
-        for move_length in range(2, repeat_time):
-            array_2d = self.integrate_process(move_length)
-            array_3d.append(array_2d)
-            array_2d = self.integrate_process(-1*move_length)
-            array_3d.insert(0,array_2d)
-        self.array_3d = array_3d
-        print(self.array_3d)
+# class Coordinate:
+    # def __init__(self, N:int):
+    #     self.N = 5
+    #     array_3d = [self.integrate_process(1)]
+    #     repeat_time = self.N//2+1 if self.N < 256 else int(129-(129/1000)*(self.N-256))
+    #     repeat_time = 5 if repeat_time < 5 else repeat_time
+    #     print(repeat_time)
+    #     for move_length in range(2, repeat_time):
+    #         array_2d = self.integrate_process(move_length)
+    #         array_3d.append(array_2d)
+    #         array_2d = self.integrate_process(-1*move_length)
+    #         array_3d.insert(0,array_2d)
+    #     self.array_3d = array_3d
+    #     print(self.array_3d)
 
-    def create_2d_array(self,size:int):
-        n = size
-        le = self.move_length
-        array_2d = [[(le, i, j) for j in range(n)] for i in range(n)]
-        return array_2d
+    # def create_2d_array(self,size:int):
+    #     n = size
+    #     le = self.move_length
+    #     array_2d = [[(le, i, j) for j in range(n)] for i in range(n)]
+    #     return array_2d
     
-    def first_process(self, input_array):   #同じ要素を持つタプルを削除
-        co = input_array.copy()
-        for i in range(len(co)-1):
-            flag = 0
-            for j in range(len(co[i]) - 1, -1, -1):
-                if co[i][j][1] == co[i][j][2]:
-                    co[i][j] = co[i+1][j]
-                    flag = 1
-                elif flag == 1:
-                    co[i][j] = co[i+1][j]
-        return co[:-1]
+    # def first_process(self, input_array):   #同じ要素を持つタプルを削除
+    #     co = input_array.copy()
+    #     for i in range(len(co)-1):
+    #         flag = 0
+    #         for j in range(len(co[i]) - 1, -1, -1):
+    #             if co[i][j][1] == co[i][j][2]:
+    #                 co[i][j] = co[i+1][j]
+    #                 flag = 1
+    #             elif flag == 1:
+    #                 co[i][j] = co[i+1][j]
+    #     return co[:-1]
     
-    def second_process(self, input_array):  #(1,0)と(0,1)は等価なので前者を削除
-        co = input_array.copy()
-        for i in range(len(co)):
-            for j in range(len(co[i])-1):
-                if co[i][j][1] - co[i][j][2] == 1:
-                    co[i].remove(co[i][j])
-        return co
+    # def second_process(self, input_array):  #(1,0)と(0,1)は等価なので前者を削除
+    #     co = input_array.copy()
+    #     for i in range(len(co)):
+    #         for j in range(len(co[i])-1):
+    #             if co[i][j][1] - co[i][j][2] == 1:
+    #                 co[i].remove(co[i][j])
+    #     return co
 
-    def integrate_process(self,move_length):
-        if move_length == 1:
-            self.move_length = move_length
-            print("aaa")
-            array1 = self.create_2d_array(self.N)
-            print("bbb")
-            array2 = self.first_process(array1)
-            print("ccc")
-            array3 = self.second_process(array2)
-            print("ddd")
-            return array3
-        elif move_length > 1:
-            self.move_length = move_length
-            array1 = self.create_2d_array(self.N-move_length+2)
-            array2 = self.first_process(array1)
-            for row in array2:
-                row.pop()
-            return array2
-        elif move_length < 0:
-            self.move_length = move_length
-            move_length = -1 * move_length
-            array1 = self.create_2d_array(self.N-move_length+2)
-            for row in array1:
-                row.pop()
-            return array1
+    # def integrate_process(self,move_length):
+    #     if move_length == 1:
+    #         self.move_length = move_length
+    #         print("aaa")
+    #         array1 = self.create_2d_array(self.N)
+    #         print("bbb")
+    #         array2 = self.first_process(array1)
+    #         print("ccc")
+    #         array3 = self.second_process(array2)
+    #         print("ddd")
+    #         return array3
+    #     elif move_length > 1:
+    #         self.move_length = move_length
+    #         array1 = self.create_2d_array(self.N-move_length+2)
+    #         array2 = self.first_process(array1)
+    #         for row in array2:
+    #             row.pop()
+    #         return array2
+    #     elif move_length < 0:
+    #         self.move_length = move_length
+    #         move_length = -1 * move_length
+    #         array1 = self.create_2d_array(self.N-move_length+2)
+    #         for row in array1:
+    #             row.pop()
+    #         return array1
 
 class Swap:
-    def __init__(self, array_3d:list, baseline_tour:list, dist:list):
+    def __init__(self, baseline_tour:list, dist:list):
         self.baseline_tour = baseline_tour
-        self.array_3d = array_3d
+        # self.array_3d = array_3d
         self.dist = dist
+        self.N = len(dist)
 
-    def insert_at_position(self, lst:list, remove_position:int, insert_position:int, remove_length:int)->list:
+    def insert_at_position(self, lst, remove_length, remove_position, insert_position):
+        # 準備
         lst_copy = lst.copy()
-        assert remove_position != insert_position
-        # 先頭要素を取得
-        first_element = lst_copy[remove_position]
-        # 先頭要素をリストから削除
-        lst_copy.pop(remove_position)
-        # 指定された位置に先頭要素を挿入
-        lst_copy.insert(insert_position, first_element)
+        minus = False
+        if remove_length < 0:
+            minus = True
+            remove_length = -remove_length
+        turn = True if (remove_position + remove_length > len(lst)) else False
+        # リストから取り除く要素を取得
+        double_lst = lst_copy + lst_copy
+        removed_elements = double_lst[remove_position : (remove_position + remove_length)]
+        # リストから要素を取り除く
+        if turn:
+            lst_copy = lst_copy[(remove_position + remove_length - len(lst)):remove_position]
+        else:
+            lst_copy = lst_copy[:remove_position] + lst_copy[(remove_position + remove_length):]
+        # リストに要素を挿入する
+        if minus:
+            lst_copy = lst_copy[:insert_position] + removed_elements[::-1] + lst_copy[insert_position:]
+        else:
+            lst_copy = lst_copy[:insert_position] + removed_elements + lst_copy[insert_position:]
         return lst_copy
     
-    def assign_sector(self, N, float1, float2):
-        width = 1 / N
-        if float1 == 1:
-            float1 -= 0.0000001
-        if float2 == 1:
-            float2 -= 0.0000001
-        i = math.floor(float1 / width)  #y座標
-        j = math.floor(float2 / width)  #x座標
-        # print(f"float1:{float1}, float2:{float2},i:{i}, j:{j}")
-        return i, j
+    def assign_sector(self, float1, float2, float3): #省略の工夫なし
+        N = self.N
 
-    def swap_order(self, float1, float2):
-        array_3d = self.array_3d.copy()
-        N = len(array_3d)
-        i, j = self.assign_sector(N, float1, float2)
-        remove_pos, insert_pos = array_3d[i][j][0], array_3d[i][j][1]
+        float1 = (1 - 0.00000001) if float1 == 1 else float1
+        float2 = (1 - 0.00000001) if float2 == 1 else float2
+        float3 = (1 - 0.00000001) if float3 == 1 else float3
+
+        divide_1 = (N//2)*2 - 1
+        divide_2 = N
+        
+        remove_length_raw = math.floor(float1 * divide_1)
+        remove_length = N//2 - remove_length_raw if N//2 - remove_length_raw > 0 else N//2 - remove_length_raw - 2
+        remove_position = math.floor(float2 * divide_2)
+        divide_3 = N + 1 - abs(remove_length)
+        # print(f"float1:{float1}, float2:{float2}, float3:{float3}")
+        # print(f"divide_1:{divide_1}, divide_2:{divide_2}, divide_3:{divide_3}")
+        insert_position = math.floor(float3 * divide_3)
+        return remove_length, remove_position, insert_position
+
+    # def swap_order(self, float1, float2, float3):
+        # array_3d = self.array_3d.copy()
+        # N = len(array_3d)
+        # remove_length, remove_position, insert_position = self.assign_sector(float1, float2, float3)
+        # remove_pos, insert_pos = array_3d[i][j][0], array_3d[i][j][1]
         # print(f"remove_pos:{remove_pos}, insert_pos:{insert_pos}")
-        return remove_pos, insert_pos
+        # return remove_length, remove_position, insert_position
 
-    def swap_and_distance(self, float1, float2):
+    def swap_and_distance(self, random_numbers:list):
         if self.baseline_tour[0] == self.baseline_tour[-1]:
             baseline_tour_copy = self.baseline_tour.copy()[:-1]
         else:
             baseline_tour_copy = self.baseline_tour.copy()
-        remove_pos, insert_pos = self.swap_order(float1, float2)
-        new_tour = self.insert_at_position(baseline_tour_copy, remove_pos, insert_pos)
+        remove_length, remove_position, insert_position = self.assign_sector(random_numbers[0], random_numbers[1], random_numbers[2])
+        new_tour = self.insert_at_position(baseline_tour_copy, remove_length, remove_position, insert_position)
         new_distance = calculate_total_distance(self.dist, new_tour)
         return new_tour, new_distance
 
 class Tour:
-    def __init__(self, length:int, order:list, random_number:list, box_order:float ,already_baseline:bool=False):
+    def __init__(self, length:float, order:list, random_number:list, box_order:int ,already_baseline:bool=False):
         self.length = length
         self.order = order
         self.random_number = random_number
@@ -171,10 +192,10 @@ class Search_in_same_baseline:
         self.baseline_order = baseline_tour.order
         self.baseline_order_length = calculate_total_distance(dist, self.baseline_order)
         self.N = len(set(self.baseline_order))
-        self.array_3d = array_3d
-        self.swap = Swap(self.array_3d, self.baseline_order, dist)
+        # self.array_3d = array_3d
+        self.swap = Swap(self.baseline_order, dist)
         # self.from_top = self.search_all(self.baseline_tour)
-        self.search_times = 100
+        self.search_times = 1000
 
     # def create_3d_array(self):
     #     return Coordinate(self.N).array_3d
@@ -182,19 +203,21 @@ class Search_in_same_baseline:
     def plot_sobol_points(self, num_points, box_range:list):
         # 二次元平面にSobol乱数を生成
         # 引数は 次元数、 シード(任意)
-        sobol = Sobol(2)
+        sobol = Sobol(3)
         sobol_points = sobol.generate(num_points)
         # box_rangeに合うようにsobol_pointsを線形変換
         sobol_points[0] = sobol_points[0] * (box_range[0][1] - box_range[0][0]) + box_range[0][0]
         sobol_points[1] = sobol_points[1] * (box_range[1][1] - box_range[1][0]) + box_range[1][0]
+        sobol_points[2] = sobol_points[2] * (box_range[2][1] - box_range[2][0]) + box_range[2][0]
         return sobol_points.T
     
     def random_number_in_box(self, box_range:list):
         random1 = random.uniform(box_range[0][0], box_range[0][1])
         random2 = random.uniform(box_range[1][0], box_range[1][1])
-        return random1, random2
+        random3 = random.uniform(box_range[2][0], box_range[2][1])
+        return [random1, random2, random3]
     
-    def search(self, center_tour:Tour, use_sobol:bool=False):
+    def search(self, center_tour:Tour, use_sobol:bool=True):
         tours = [center_tour]
         box_order = center_tour.box_order
         box_range = center_tour.box()
@@ -205,35 +228,35 @@ class Search_in_same_baseline:
             sobol_array = self.plot_sobol_points(self.search_times, box_range)
         for i in range(self.search_times):
             if use_sobol:
-                random1,random2 = sobol_array[i]
+                random_numbers = sobol_array[i]
             else:
-                random1,random2 = self.random_number_in_box(box_range)
+                random_numbers = self.random_number_in_box(box_range)
             
-            new_order, new_distance = self.swap.swap_and_distance(random1, random2)
+            new_order, new_distance = self.swap.swap_and_distance(random_numbers)
             if new_distance == self.baseline_order_length:
-                new_tour = Tour(new_distance, new_order, [random1, random2], box_order+1, True)
+                new_tour = Tour(new_distance, new_order, random_numbers, box_order+1, True)
             else:
-                new_tour = Tour(new_distance, new_order, [random1, random2], box_order+1)
+                new_tour = Tour(new_distance, new_order, random_numbers, box_order+1)
             if (all(tour.length != new_tour.length for tour in tours) or 
             # all(distance(tour.random_number, new_tour.random_number) > 10**(-box_order-1) for tour in tours)):
             all(distance(tour.random_number, new_tour.random_number) > 0.1 for tour in tours)):
-                    tours.append(new_tour)
+                tours.append(new_tour)
             # length 属性でソート
             tours = sorted(tours, key=lambda x: x.length)
         center_tour.box_order += 1
         if self.baseline_tour in tours:
             tours.remove(self.baseline_tour)
-        return tours[:3]
+        return tours[:10]
 
     def search_all(self):
-        self.baseline_tour.random_number = [0.5, 0.5]
+        self.baseline_tour.random_number = [0.5, 0.5, 0.5]
         tours_all = []
 
-        new_order, new_distance = self.swap.swap_and_distance(0.0,1.0)
-        new_tour = Tour(new_distance, new_order, [0.0,1.0], 0, True)
+        new_order, new_distance = self.swap.swap_and_distance([0.5,0.0,1.0])
+        new_tour = Tour(new_distance, new_order, [0.5,0.0,1.0], 0, True)
         tours_all.append(new_tour)
-        new_order, new_distance = self.swap.swap_and_distance(1.0,0.0)
-        new_tour = Tour(new_distance, new_order, [1.0,0.0], 0, True)
+        new_order, new_distance = self.swap.swap_and_distance([0.5,1.0,0.0])
+        new_tour = Tour(new_distance, new_order, [0.5,1.0,0.0], 0, True)
         tours_all.append(new_tour)
 
         tours = self.search(self.baseline_tour)
@@ -244,14 +267,14 @@ class Search_in_same_baseline:
         tours_all = sorted(tours_all, key=lambda x: x.length)
 
         # for i in range(min(self.N//3,50)):
-        for i in range(min(self.N,10)):
+        for i in range(min(self.N,100)):
             min_order_tour = sorted(tours_all, key=lambda x: x.box_order)[0]
             tours = self.search(min_order_tour)
             for tour in tours:
                 if (all(tour_all.length != tour.length for tour_all in tours_all) or 
                 all(distance(tour.random_number, tour_all.random_number) > 0.1 for tour_all in tours)):
                     tours_all.append(tour)
-            tours_all = sorted(tours_all, key=lambda x: x.length)[:3]
+            tours_all = sorted(tours_all, key=lambda x: x.length)[:10]
             # print(f"i:{i:>3}, length:{tours_all[0].length}, box_order:{tours_all[0].box_order}")
         # if self.baseline_tour in tours_all:
         #     tours_all.remove(self.baseline_tour)
@@ -276,9 +299,9 @@ class Search_in_different_baseline:
             for tour in tours:
                 if all(tour_all.length != tour.length for tour_all in tours_all):
                     tours_all_copy.append(tour)
-            tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)[:5]
+            tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)[:10]
             # print(f"i:{i:>2}番目, length:{tours_all_copy[0].length}")
-        return sorted(tours_all_copy, key=lambda x: x.length)[:5]
+        return sorted(tours_all_copy, key=lambda x: x.length)[:10]
     
     def search_all(self):
         self.first_baseline_tour.already_baseline = False
@@ -294,7 +317,7 @@ class Search_in_different_baseline:
                     #     continue
                     tours_all.append(tour)
             # print(len(tours_all))
-            tours_all = sorted(tours_all, key=lambda x: x.length)[:5]
+            tours_all = sorted(tours_all, key=lambda x: x.length)[:10]
             print(f"i:{i:>2}, length:{tours_all[0].length:<12}, tours_all_len:{len(tours_all)},\
             num_True:{sum(tour_all.already_baseline == True for tour_all in tours_all)}\
             num_already_baseline:{sum(tour_all.length in already_baseline_length for tour_all in tours_all)}")
@@ -321,10 +344,10 @@ class Different_first_baseline:
     def search(self):
         tours_all = []
         start_time = time.time()
-        search_city_num = self.N//5
+        search_city_num = self.N//10
         for start in range(search_city_num):
             baseline = Baseline_first(self.file_number, self.dist, self.short_path, start)
-            first_baseline_tour = Tour(baseline.distance, baseline.baseline_tour, [0.5, 0.5], 0)
+            first_baseline_tour = Tour(baseline.distance, baseline.baseline_tour, [0.5, 0.5, 0.5], 0)
             search_obj = Search_in_different_baseline(first_baseline_tour)
             tours = search_obj.search_all()
             for tour in tours:
@@ -343,18 +366,17 @@ class Different_first_baseline:
 # 円環座標で探索する
 
 if __name__ == '__main__':
-    file_num = 0
+    file_num = 3
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
-    short_path = cal_shortpath(dist)
-    array_3d = Coordinate(len(cities)).array_3d
+    # short_path = cal_shortpath(dist)
+    short_path = None
+    # array_3d = Coordinate(len(cities)).array_3d
     search_times = 100
     already_baseline_length = set()
 
     dodo = Different_first_baseline(file_num, dist, short_path)
     top3 = dodo.search()
-
-    print("あああああ",top3)
     last_1 = Search_in_same_baseline(top3[0]).search_all()[0]
     top1_length = last_1.length
     print(f"最短経路は...:{top1_length}")

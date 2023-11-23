@@ -24,7 +24,12 @@ def format_tour(tour):
     return 'index\n' + '\n'.join(map(str, tour))
 
 def distance(city1, city2):
-    return math.sqrt((city1[0] - city2[0]) ** 2 + (city1[1] - city2[1]) ** 2)
+    for i in range(len(city1)):
+        if i == 0:
+            dist = (city1[i] - city2[i]) ** 2
+        else:
+            dist += (city1[i] - city2[i]) ** 2
+    return math.sqrt(dist)
 
 # 全てのパスの距離を計算する
 def cal_dist(cities):
@@ -163,7 +168,7 @@ def two_opt_classic(tour, dist):
     return tour
 
 
-def optimal_tour(distance_matrix, short_path:list, startpoint:int=None):
+def optimal_tour(distance_matrix, startpoint:int, short_path:list):
     N = len(distance_matrix)
     if startpoint is None:
         random.seed(42)  # ランダムシードを42に設定
