@@ -26,7 +26,7 @@ class Baseline_first:
 class Coordinate:
     def __init__(self, N:int):
         self.N = 5
-        array_3d = np.array([self.integrate_process(1)])
+        array_3d = [self.integrate_process(1)]
         repeat_time = self.N//2+1 if self.N < 256 else int(129-(129/1000)*(self.N-256))
         repeat_time = 5 if repeat_time < 5 else repeat_time
         print(repeat_time)
@@ -41,7 +41,7 @@ class Coordinate:
     def create_2d_array(self,size:int):
         n = size
         le = self.move_length
-        array_2d = np.array([[(le, i, j) for j in range(n)] for i in range(n)])
+        array_2d = [[(le, i, j) for j in range(n)] for i in range(n)]
         return array_2d
     
     def first_process(self, input_array):   #同じ要素を持つタプルを削除
@@ -347,9 +347,7 @@ if __name__ == '__main__':
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
     short_path = cal_shortpath(dist)
-    print("あああ")
     array_3d = Coordinate(len(cities)).array_3d
-    print("いいい")
     search_times = 100
     already_baseline_length = set()
 

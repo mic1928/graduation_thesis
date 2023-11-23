@@ -51,3 +51,6 @@ array2 = np.delete(my_array, -1, 1)
 print(array2)
 
 
+
+
+
