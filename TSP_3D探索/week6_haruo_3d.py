@@ -104,7 +104,7 @@ def tsp_approximation(graph, start_node:int):
 
 
 # 2-opt法
-def two_opt(tour, dist, short_path):
+def two_opt_update(tour, dist, short_path):
     # print(short_path)
     # print(tour)
     tour.append(tour[0])
@@ -119,6 +119,7 @@ def two_opt(tour, dist, short_path):
             spot1 = tour[i]
             spot1_end = tour[i + 1]
             # print(f"tour:{tour},spot1:{spot1},spot1_end:{spot1_end},short_path[spot1]:{short_path[spot1]}")
+            # print("short_path[spot1]:",short_path[spot1])
             index_spot = short_path[spot1].index(spot1_end)
             j_array = short_path[spot1][:index_spot]
             for i_ in range(i+2):
@@ -138,10 +139,33 @@ def two_opt(tour, dist, short_path):
     tour.pop(-1)
     return tour
 
+# 2-opt法
+def two_opt_classic(tour, dist):
+    tour.append(tour[0])
+    N = len(tour)
+    changed = True
+
+    while changed:
+        changed = False
+    # 任意の二つのエッジを選択
+        for i in range(N-3):
+            spot1 = tour[i]
+            spot1_end = tour[i + 1]
+            for j in range(i+2, N-1):
+                spot2 = tour[j]
+                spot2_end = tour[j + 1]
+                if (dist[spot1][spot1_end] + dist[spot2][spot2_end]) > (dist[spot1][spot2] + dist[spot1_end][spot2_end]):
+                    tour = tour[:i+1] + list(reversed(tour[i+1:j+1])) + tour[j+1:]
+                    changed = True
+                    break
+            if changed == True:
+                break
+    tour.pop(-1)
+    return tour
 
 
-def optimal_tour(distance_matrix, cities:list, short_path:list, startpoint:int=None):
-    N = len(cities)
+def optimal_tour(distance_matrix, short_path:list, startpoint:int=None):
+    N = len(distance_matrix)
     if startpoint is None:
         random.seed(42)  # ランダムシードを42に設定
         startpoint = random.randint(0, N - 1)  # 0からN-1までの整数を生成
@@ -150,7 +174,8 @@ def optimal_tour(distance_matrix, cities:list, short_path:list, startpoint:int=N
     two_ap_tour = tsp_approximation(spanning_tree, startpoint) #2近似アルゴリズム
     # lap_time = time.time()
     # print(f"2近似アルゴリズム計算時間:{lap_time-start_time}")
-    two_opt_tour = two_opt(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
+    two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
+    # two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
     return two_opt_tour
     # return two_ap_tour
 
@@ -204,7 +229,7 @@ if __name__ == '__main__':
         lap_time = time.time()
         print(f"dist計算時間:{lap_time-start_time}")
 
-        short_path = sort_indices_by_values(dist)
+        short_path = cal_shortpath(dist)
         lap_time = time.time()
         print(f"short_path計算時間:{lap_time-start_time}")
 
