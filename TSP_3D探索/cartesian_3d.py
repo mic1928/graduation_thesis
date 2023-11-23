@@ -25,8 +25,8 @@ class Baseline_first:
     
 class Coordinate:
     def __init__(self, N:int):
-        self.N = 4096
-        array_3d = [self.integrate_process(1)]
+        self.N = 5
+        array_3d = np.array([self.integrate_process(1)])
         repeat_time = self.N//2+1 if self.N < 256 else int(129-(129/1000)*(self.N-256))
         repeat_time = 5 if repeat_time < 5 else repeat_time
         print(repeat_time)
@@ -36,12 +36,12 @@ class Coordinate:
             array_2d = self.integrate_process(-1*move_length)
             array_3d.insert(0,array_2d)
         self.array_3d = array_3d
-        print(len(self.array_3d))
+        print(self.array_3d)
 
     def create_2d_array(self,size:int):
         n = size
         le = self.move_length
-        array_2d = [[(le, i, j) for j in range(n)] for i in range(n)]
+        array_2d = np.array([[(le, i, j) for j in range(n)] for i in range(n)])
         return array_2d
     
     def first_process(self, input_array):   #同じ要素を持つタプルを削除

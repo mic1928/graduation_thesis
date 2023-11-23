@@ -38,11 +38,16 @@ print(result1)  # 出力: [10, 20, 50, 30, 40]
 result2 = insert_at_position([10, 20, 30, 40, 50], 4, 3, 2)
 print(result2)  # 出力: [20, 30, 40, 50, 10]
 """
-horizontal_under = 1.3
-horizontal_under = 0 if horizontal_under < 0 else horizontal_under
-horizontal_upper = 1 if horizontal_upper > 1 else horizontal_upper
-print(horizontal_under)
+# horizontal_under = 1.3
+# horizontal_under = 0 if horizontal_under < 0 else horizontal_under
+# horizontal_upper = 1 if horizontal_upper > 1 else horizontal_upper
+# print(horizontal_under)
 
-
+import numpy as np
+my_array = np.array([[1, 2, 3],
+                     [4, 5, 6],
+                     [7, 8, 9]])
+array2 = np.delete(my_array, -1, 1)
+print(array2)
 
 
