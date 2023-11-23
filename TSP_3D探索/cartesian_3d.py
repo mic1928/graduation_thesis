@@ -12,12 +12,14 @@ class Baseline_first:
     def __init__(self, file_number:int, dist:list, short_path:list, first_point:int=0 ,baseline_tour:list=None):
         self.file_number = file_number
         self.first_point = first_point
-        self.num_cities = len(dist)
+        self.dist = dist
+        self.short_path = short_path
+        self.num_cities = len(self.dist)
         self.calculate_baseline_tour()
 
     def calculate_baseline_tour(self):
-        res_tour = optimal_tour(dist, short_path, self.first_point)
-        distance = calculate_total_distance(dist,res_tour)
+        res_tour = optimal_tour(self.dist, self.short_path, self.first_point)
+        distance = calculate_total_distance(self.dist,res_tour)
         self.baseline_tour = res_tour
         self.distance = distance
     
