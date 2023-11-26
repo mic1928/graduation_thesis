@@ -23,73 +23,6 @@ class Baseline_first:
         distance = calculate_total_distance(self.dist,res_tour)
         self.baseline_tour = res_tour
         self.distance = distance
-    
-# class Coordinate:
-    # def __init__(self, N:int):
-    #     self.N = 5
-    #     array_3d = [self.integrate_process(1)]
-    #     repeat_time = self.N//2+1 if self.N < 256 else int(129-(129/1000)*(self.N-256))
-    #     repeat_time = 5 if repeat_time < 5 else repeat_time
-    #     print(repeat_time)
-    #     for move_length in range(2, repeat_time):
-    #         array_2d = self.integrate_process(move_length)
-    #         array_3d.append(array_2d)
-    #         array_2d = self.integrate_process(-1*move_length)
-    #         array_3d.insert(0,array_2d)
-    #     self.array_3d = array_3d
-    #     print(self.array_3d)
-
-    # def create_2d_array(self,size:int):
-    #     n = size
-    #     le = self.move_length
-    #     array_2d = [[(le, i, j) for j in range(n)] for i in range(n)]
-    #     return array_2d
-    
-    # def first_process(self, input_array):   #同じ要素を持つタプルを削除
-    #     co = input_array.copy()
-    #     for i in range(len(co)-1):
-    #         flag = 0
-    #         for j in range(len(co[i]) - 1, -1, -1):
-    #             if co[i][j][1] == co[i][j][2]:
-    #                 co[i][j] = co[i+1][j]
-    #                 flag = 1
-    #             elif flag == 1:
-    #                 co[i][j] = co[i+1][j]
-    #     return co[:-1]
-    
-    # def second_process(self, input_array):  #(1,0)と(0,1)は等価なので前者を削除
-    #     co = input_array.copy()
-    #     for i in range(len(co)):
-    #         for j in range(len(co[i])-1):
-    #             if co[i][j][1] - co[i][j][2] == 1:
-    #                 co[i].remove(co[i][j])
-    #     return co
-
-    # def integrate_process(self,move_length):
-    #     if move_length == 1:
-    #         self.move_length = move_length
-    #         print("aaa")
-    #         array1 = self.create_2d_array(self.N)
-    #         print("bbb")
-    #         array2 = self.first_process(array1)
-    #         print("ccc")
-    #         array3 = self.second_process(array2)
-    #         print("ddd")
-    #         return array3
-    #     elif move_length > 1:
-    #         self.move_length = move_length
-    #         array1 = self.create_2d_array(self.N-move_length+2)
-    #         array2 = self.first_process(array1)
-    #         for row in array2:
-    #             row.pop()
-    #         return array2
-    #     elif move_length < 0:
-    #         self.move_length = move_length
-    #         move_length = -1 * move_length
-    #         array1 = self.create_2d_array(self.N-move_length+2)
-    #         for row in array1:
-    #             row.pop()
-    #         return array1
 
 class Tour:
     def __init__(self, length:float, order:list, random_number:list, box_order:int ,already_baseline:bool=False):
@@ -201,10 +134,8 @@ class Search_in_same_baseline:
         already_baseline_length.add(self.baseline_tour.length)
         self.baseline_tour.box_order = 0
         self.baseline_order = baseline_tour.order
-        # self.baseline_order_length = calculate_total_distance(dist, self.baseline_order)
         self.baseline_order_length = baseline_tour.length
         self.N = len(set(self.baseline_order))
-        # self.swap = Swap(self.baseline_order, dist)
         self.swap = Swap(self.baseline_tour, dist)
         self.search_times = 10
 
