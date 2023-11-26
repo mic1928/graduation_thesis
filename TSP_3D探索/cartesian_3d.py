@@ -171,13 +171,19 @@ class Swap:
         remove_length = N//2 - remove_length_raw if N//2 - remove_length_raw > 0 else N//2 - remove_length_raw - 2
         remove_position = math.floor(float2 * divide_2)
         divide_3 = N + 1 - abs(remove_length)
+        # print(f"float1:{float1}, float2:{float2}, float3:{float3}")
+        # print(f"divide_1:{divide_1}, divide_2:{divide_2}, divide_3:{divide_3}")
         insert_position = math.floor(float3 * divide_3)
+        # print(f"remove_length:{remove_length}, remove_position:{remove_position}, insert_position:{insert_position}")
         return remove_length, remove_position, insert_position
 
     def swap_and_distance(self, random_numbers:list):
         baseline_tour_copy = self.baseline_order.copy()
         remove_length, remove_position, insert_position = self.assign_sector(random_numbers[0], random_numbers[1], random_numbers[2])
-        new_tour, insert_first, insert_last, insert_before, insert_after = self.insert_at_position(baseline_tour_copy, remove_length, remove_position, insert_position)
+        new_tour, insert_first, insert_last, insert_before, insert_after = \
+            self.insert_at_position(baseline_tour_copy, remove_length, remove_position, insert_position)
+        
+        # new_distance = calculate_total_distance(self.dist, new_tour)
 
         cut1 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[remove_position]]
         cut2 = self.dist[self.baseline_order[(remove_position+abs(remove_length)-1)%self.N]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
@@ -195,7 +201,8 @@ class Search_in_same_baseline:
         already_baseline_length.add(self.baseline_tour.length)
         self.baseline_tour.box_order = 0
         self.baseline_order = baseline_tour.order
-        self.baseline_order_length = calculate_total_distance(dist, self.baseline_order)
+        # self.baseline_order_length = calculate_total_distance(dist, self.baseline_order)
+        self.baseline_order_length = baseline_tour.length
         self.N = len(set(self.baseline_order))
         # self.swap = Swap(self.baseline_order, dist)
         self.swap = Swap(self.baseline_tour, dist)
@@ -379,9 +386,8 @@ class Different_first_baseline:
             print(f"経過時間：{end_time - start_time:.1f}秒, 予想残り時間：{((end_time - start_time)/(start+1)) *(search_city_num-start-1):.1f}秒")
         return tours_all
 
-# 近い都市をクラスタリングでまとめる
-# 突然変異を起こす
-# 円環座標で探索する
+# 適切なところで探索を打ち切り無駄を省く
+# 
 
 if __name__ == '__main__':
     file_num = 5

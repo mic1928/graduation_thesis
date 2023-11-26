@@ -184,6 +184,7 @@ def optimal_tour(distance_matrix, startpoint:int, short_path:list):
     # return two_ap_tour
 
 def calculate_total_distance(distance_matrix, tour):
+    print("ええええええ")
     tour_copy = tour.copy()
     if tour_copy[0] != tour_copy[-1]:
         tour_copy.append(tour_copy[0])
