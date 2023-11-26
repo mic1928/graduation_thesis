@@ -171,37 +171,13 @@ class Swap:
         remove_length = N//2 - remove_length_raw if N//2 - remove_length_raw > 0 else N//2 - remove_length_raw - 2
         remove_position = math.floor(float2 * divide_2)
         divide_3 = N + 1 - abs(remove_length)
-        # print(f"float1:{float1}, float2:{float2}, float3:{float3}")
-        # print(f"divide_1:{divide_1}, divide_2:{divide_2}, divide_3:{divide_3}")
         insert_position = math.floor(float3 * divide_3)
-        # print(f"remove_length:{remove_length}, remove_position:{remove_position}, insert_position:{insert_position}")
         return remove_length, remove_position, insert_position
 
-    # def swap_order(self, float1, float2, float3):
-        # array_3d = self.array_3d.copy()
-        # N = len(array_3d)
-        # remove_length, remove_position, insert_position = self.assign_sector(float1, float2, float3)
-        # remove_pos, insert_pos = array_3d[i][j][0], array_3d[i][j][1]
-        # print(f"remove_pos:{remove_pos}, insert_pos:{insert_pos}")
-        # return remove_length, remove_position, insert_position
-
     def swap_and_distance(self, random_numbers:list):
-        # time1 = time.time()
         baseline_tour_copy = self.baseline_order.copy()
-        # time2 = time.time()
         remove_length, remove_position, insert_position = self.assign_sector(random_numbers[0], random_numbers[1], random_numbers[2])
-        # time3 = time.time()
         new_tour, insert_first, insert_last, insert_before, insert_after = self.insert_at_position(baseline_tour_copy, remove_length, remove_position, insert_position)
-        # time4 = time.time()
-        # new_distance = calculate_total_distance(self.dist, new_tour)
-        # insert_index =  new_tour.index(insert_element)
-        # print(insert_element)
-        # print(insert_index)
-        # insert_last_idx = new_tour.index(insert_last)
-        # insert_after_idx = new_tour.index(insert_after)
-        # insert_first_idx = new_tour.index(insert_first)
-        # insert_before_idx = new_tour.index(insert_before)
-        # print(self.baseline_length)
 
         cut1 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[remove_position]]
         cut2 = self.dist[self.baseline_order[(remove_position+abs(remove_length)-1)%self.N]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
@@ -210,18 +186,6 @@ class Swap:
         connect2 = self.dist[insert_first][insert_before]
         connect3 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
         new_distance = round(self.baseline_length - cut1 - cut2 - cut3 + connect1 + connect2 + connect3,5)
-        # print("--------------------------------------------------")
-        # print(f"remove_length:{remove_length}, remove_position:{remove_position}, insert_position:{insert_position}")
-        # print(f"new_tour:{new_tour}")
-        # print(f"baseline_tour:{self.baseline_order}")
-        # print(f"self.baseline_order[remove_position-1]:{self.baseline_order[remove_position-1]},\
-        #       self.baseline_order[remove_position]:{self.baseline_order[remove_position]},\
-        #       self.baseline_order[(remove_position+remove_length-1)%self.N]:{self.baseline_order[(remove_position+abs(remove_length)-1)%self.N]},\
-        #       self.baseline_order[(remove_position+remove_length)%self.N]:{self.baseline_order[(remove_position+abs(remove_length))%self.N]},\
-        #       insert_last:{insert_last}, insert_after:{insert_after}, insert_first:{insert_first}, insert_before:{insert_before}")
-        
-        # time5 = time.time()
-        # print(f"time:{(time2-time1)*1000000:.1f}, {(time3-time2)*1000000:.1f}, {(time4-time3)*1000000:.1f}, {(time5-time4)*1000000:.1f}")
         return new_tour, new_distance
 
 class Search_in_same_baseline:
