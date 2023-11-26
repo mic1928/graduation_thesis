@@ -70,11 +70,18 @@ print(array2)
 # sec = swsw.assign_sector(0.8,0.5,0.7)
 # print(sec)
 
-
+"""
 from quasimc.sobol import Sobol
 sobol = Sobol(3)
 sobol_points = sobol.generate(100)
 print(sobol_points.T[10])
-
+"""
+import time
+from tqdm import tqdm
+from math import log10
+sum = 1
+for i in tqdm(range(1,1000000)):
+    sum *= i
+print(log10(sum))
 
 
