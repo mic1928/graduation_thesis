@@ -178,13 +178,12 @@ def optimal_tour(distance_matrix, startpoint:int, short_path:list):
     two_ap_tour = tsp_approximation(spanning_tree, startpoint) #2近似アルゴリズム
     # lap_time = time.time()
     # print(f"2近似アルゴリズム計算時間:{lap_time-start_time}")
-    # two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
-    two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
+    two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
+    # two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
     return two_opt_tour
     # return two_ap_tour
 
 def calculate_total_distance(distance_matrix, tour):
-    print("ええええええ")
     tour_copy = tour.copy()
     if tour_copy[0] != tour_copy[-1]:
         tour_copy.append(tour_copy[0])

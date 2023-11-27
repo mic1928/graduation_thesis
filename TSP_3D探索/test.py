@@ -76,12 +76,49 @@ sobol = Sobol(3)
 sobol_points = sobol.generate(100)
 print(sobol_points.T[10])
 """
-import time
-from tqdm import tqdm
-from math import log10
-sum = 1
-for i in tqdm(range(1,1000000)):
-    sum *= i
-print(log10(sum))
+# import time
+# from tqdm import tqdm
+# from math import log10
+# sum = 1
+# for i in tqdm(range(1,100000)):
+#     sum *= i
+# print(log10(sum))
+
+"""
+lst:[0, 50, 36, 10, 57, 30, 16, 12, 21, 28, 56, 13, 62, 4, 15, 17, 38, 35, 61, 6, 9, 45, 
+     41, 11, 23, 37, 20, 26, 47, 58, 59, 46, 3, 22, 31, 40, 24, 18, 48, 5, 
+     29, 1, 63, 19, 51, 34, 49, 43, 55, 
+     54, 33, 42, 39, 7, 27, 52, 2, 14, 32, 53, 44, 25, 60, 8]
+"""
+
+def remove_extremes(lst):
+    if len(lst) <= 20:
+        return []
+
+    sorted_lst = sorted(lst)
+    trimmed_lst = sorted_lst[10:-10]
+
+    return trimmed_lst
+
+file_path = '/Users/tomo.f/Desktop/卒論/TSP_3D探索/mean.txt'
+
+# ファイルから数字を読み込んでリストに格納
+with open(file_path, 'r') as file:
+    numbers = [float(line.strip()) for line in file]
+
+numbers = remove_extremes(numbers)
+
+# 平均値を計算
+if numbers:
+    mean_value = (sum(numbers) / len(numbers))*100
+    print(f"平均値: {mean_value}")
+else:
+    print("ファイルに数字が含まれていません。")
+
+
+
+
+
+
 
 

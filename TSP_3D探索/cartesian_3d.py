@@ -21,6 +21,7 @@ class Baseline_first:
     def calculate_baseline_tour(self):
         res_tour = optimal_tour(self.dist, self.first_point, self.short_path)
         distance = calculate_total_distance(self.dist,res_tour)
+        print(f"経路長:{distance}")
         self.baseline_tour = res_tour
         self.distance = distance
 
@@ -104,9 +105,15 @@ class Swap:
         remove_length = N//2 - remove_length_raw if N//2 - remove_length_raw > 0 else N//2 - remove_length_raw - 2
         remove_position = math.floor(float2 * divide_2)
         divide_3 = N + 1 - abs(remove_length)
+        insert_position = math.floor(float3 * divide_3)
+        if remove_length > 0:
+            if remove_position >= insert_position:
+                remove_position += 1
+                if remove_position >= N:
+                    remove_position = N-1
+
         # print(f"float1:{float1}, float2:{float2}, float3:{float3}")
         # print(f"divide_1:{divide_1}, divide_2:{divide_2}, divide_3:{divide_3}")
-        insert_position = math.floor(float3 * divide_3)
         # print(f"remove_length:{remove_length}, remove_position:{remove_position}, insert_position:{insert_position}")
         return remove_length, remove_position, insert_position
 
@@ -137,7 +144,7 @@ class Search_in_same_baseline:
         self.baseline_order_length = baseline_tour.length
         self.N = len(set(self.baseline_order))
         self.swap = Swap(self.baseline_tour, dist)
-        self.search_times = 10
+        self.search_times = 1000
 
     # def create_3d_array(self):
     #     return Coordinate(self.N).array_3d
@@ -159,7 +166,7 @@ class Search_in_same_baseline:
         random3 = random.uniform(box_range[2][0], box_range[2][1])
         return [random1, random2, random3]
     
-    def search(self, center_tour:Tour, use_sobol:bool=True):
+    def search(self, center_tour:Tour, use_sobol:bool=False):
         tours = [center_tour]
         box_order = center_tour.box_order
         box_range = center_tour.box()
@@ -175,6 +182,7 @@ class Search_in_same_baseline:
                 random_numbers = self.random_number_in_box(box_range)
             
             new_order, new_distance = self.swap.swap_and_distance(random_numbers)
+
             if new_distance == self.baseline_order_length:
                 new_tour = Tour(new_distance, new_order, random_numbers, box_order+1, True)
             else:
@@ -187,8 +195,6 @@ class Search_in_same_baseline:
 
             # length 属性でソート
             tours = sorted(tours, key=lambda x: x.length)[:5]
-            
-        
         center_tour.box_order += 1
         if self.baseline_tour in tours:
             tours.remove(self.baseline_tour)
@@ -212,7 +218,7 @@ class Search_in_same_baseline:
                     tours_all.append(tour)
         tours_all = sorted(tours_all, key=lambda x: x.length)
 
-        for i in range(5):
+        for i in range(10):
             for tour in tours_all:
                 tours = self.search(tour)
                 for tour in tours:
@@ -259,7 +265,8 @@ class Search_in_different_baseline:
                     tours_all_copy.append(tour)
             tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)[:1]
             print(f"i:{i:>2}番目, length:{tours_all_copy[0].length}")
-        return sorted(tours_all_copy, key=lambda x: x.length)[:1]
+        # return sorted(tours_all_copy, key=lambda x: x.length)[:1]
+        return tours_all_copy
     
     def search_all(self):
         self.first_baseline_tour.already_baseline = False
@@ -317,15 +324,15 @@ class Different_first_baseline:
             print(f"経過時間：{end_time - start_time:.1f}秒, 予想残り時間：{((end_time - start_time)/(start+1)) *(search_city_num-start-1):.1f}秒")
         return tours_all
 
-# 適切なところで探索を打ち切り無駄を省く
-# 
+# 適切なところで探索を打ち切り、無駄を省く
+# 意味がない操作（同じところに挿入し直す）を取り除く
 
 if __name__ == '__main__':
-    file_num = 5
+    file_num = 4
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
-    # short_path = cal_shortpath(dist)
-    short_path = None
+    short_path = cal_shortpath(dist)
+    # short_path = None
     # array_3d = Coordinate(len(cities)).array_3d
     search_times = 100
     already_baseline_length = set()
