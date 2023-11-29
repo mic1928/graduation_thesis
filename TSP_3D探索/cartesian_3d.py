@@ -35,7 +35,7 @@ class Tour:
         # self.next_box_width = 10**(-(box_order+1))
 
     def box(self):
-        self.box_width = 5**(-self.box_order)
+        self.box_width = 10**(-self.box_order)
         x_under = self.random_number[0] - self.box_width/2
         x_upper = self.random_number[0] + self.box_width/2
         y_under = self.random_number[1] - self.box_width/2
@@ -91,7 +91,7 @@ class Swap:
             insert_last = removed_elements[-1]
         return lst_copy, insert_first, insert_last, insert_before, insert_after
     
-    def assign_sector(self, float1, float2, float3): #省略の工夫なし
+    def assign_sector(self, float1, float2, float3): #省略の工夫あり
         N = self.N
 
         float1 = (1 - 0.00000001) if float1 == 1 else float1
@@ -144,7 +144,7 @@ class Search_in_same_baseline:
         self.baseline_order_length = baseline_tour.length
         self.N = len(set(self.baseline_order))
         self.swap = Swap(self.baseline_tour, dist)
-        self.search_times = 1000
+        self.search_times = 100
 
     # def create_3d_array(self):
     #     return Coordinate(self.N).array_3d
@@ -216,9 +216,9 @@ class Search_in_same_baseline:
             if (all(tour_all.length != tour.length for tour_all in tours_all) or 
                 all(distance(tour.random_number, tour_all.random_number) > 0.5 for tour_all in tours)):
                     tours_all.append(tour)
-        tours_all = sorted(tours_all, key=lambda x: x.length)
+        tours_all = sorted(tours_all, key=lambda x: x.length)[:5]
 
-        for i in range(10):
+        for i in range(5):
             for tour in tours_all:
                 tours = self.search(tour)
                 for tour in tours:
@@ -264,7 +264,7 @@ class Search_in_different_baseline:
                 if all(tour_all.length != tour.length for tour_all in tours_all):
                     tours_all_copy.append(tour)
             tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)[:1]
-            print(f"i:{i:>2}番目, length:{tours_all_copy[0].length}")
+            # print(f"i:{i:>2}番目, length:{tours_all_copy[0].length}, random_number:{tours_all_copy[0].random_number}, box_order:{tours_all_copy[0].box_order}")
         # return sorted(tours_all_copy, key=lambda x: x.length)[:1]
         return tours_all_copy
     
@@ -334,18 +334,36 @@ if __name__ == '__main__':
     short_path = cal_shortpath(dist)
     # short_path = None
     # array_3d = Coordinate(len(cities)).array_3d
-    search_times = 100
+    # search_times = 100
     already_baseline_length = set()
 
     dodo = Different_first_baseline(file_num, dist, short_path)
     top3 = dodo.search()
-    last_1 = Search_in_same_baseline(top3[0]).search_all()[0]
-    top1_length = last_1.length
-    print(f"最短経路は...:{top1_length}")
-    for tour in top3:
+    last_1 = top3[0]
+    last1_length = last_1.length
+    print(f"最短経路は...:{last1_length}")
+
+    already_baseline_length = set()
+    retry_tour = Tour(last1_length, last_1.order, [0.5, 0.5, 0.5], 0, False)
+    retry_top = Search_in_different_baseline(retry_tour).search_all()
+    print(f"2週目の最短経路は...:{retry_top[0].length}")
+
+    for i in range(100):
+        already_baseline_length = set()
+        retry_tour = Tour(retry_top[0].length, retry_top[0].order, [0.5, 0.5, 0.5], 0, False)
+        retry_top = Search_in_different_baseline(retry_tour).search_all()
+        print(f"{i+3:>3}週目の最短経路は...:{retry_top[0].length}")
+
+    # already_baseline_length = set()
+    # retry_tour = Tour(retry_top[0].length, retry_top[0].order, [0.5, 0.5, 0.5], 0, True)
+    # retry_top = Search_in_different_baseline(retry_tour).search_all()
+
+    # print(f"4週目の最短経路は...:{retry_top[0].length}")
+
+    for tour in retry_top:
         print(tour.length)
     # top3.sort(key=lambda x: x.length)
     # top_order = top3.copy()[0].order
     with open(f'../GoogleTSP/google-step-tsp/output_{file_num}.csv', 'w') as f:
-        f.write(format_tour(last_1.order) + '\n')
+        f.write(format_tour(retry_top[0].order) + '\n')
 

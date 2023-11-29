@@ -91,30 +91,84 @@ lst:[0, 50, 36, 10, 57, 30, 16, 12, 21, 28, 56, 13, 62, 4, 15, 17, 38, 35, 61, 6
      54, 33, 42, 39, 7, 27, 52, 2, 14, 32, 53, 44, 25, 60, 8]
 """
 
-def remove_extremes(lst):
-    if len(lst) <= 20:
-        return []
+# def remove_extremes(lst):
+#     if len(lst) <= 20:
+#         return []
 
-    sorted_lst = sorted(lst)
-    trimmed_lst = sorted_lst[10:-10]
+#     sorted_lst = sorted(lst)
+#     trimmed_lst = sorted_lst[10:-10]
 
-    return trimmed_lst
+#     return trimmed_lst
 
-file_path = '/Users/tomo.f/Desktop/卒論/TSP_3D探索/mean.txt'
+# file_path = '/Users/tomo.f/Desktop/卒論/TSP_3D探索/mean.txt'
 
-# ファイルから数字を読み込んでリストに格納
-with open(file_path, 'r') as file:
-    numbers = [float(line.strip()) for line in file]
+# # ファイルから数字を読み込んでリストに格納
+# with open(file_path, 'r') as file:
+#     numbers = [float(line.strip()) for line in file]
 
-numbers = remove_extremes(numbers)
+# numbers = remove_extremes(numbers)
 
-# 平均値を計算
-if numbers:
-    mean_value = (sum(numbers) / len(numbers))*100
-    print(f"平均値: {mean_value}")
-else:
-    print("ファイルに数字が含まれていません。")
+# # 平均値を計算
+# if numbers:
+#     mean_value = (sum(numbers) / len(numbers))*100
+#     print(f"平均値: {mean_value}")
+# else:
+#     print("ファイルに数字が含まれていません。")
 
+"""
+import numpy as np
+import time
+for i in range(100):
+    time1 = time.time()
+    r = np.array([0.0,0.0,0.0])
+    for i in range(100):
+        random_array = np.random.rand(100, 3)
+        for i in range(100):
+            r += random_array[i]
+    print(r)
+
+    time2 = time.time()
+    r = np.array([0.0,0.0,0.0])
+    for i in range(100):
+        for i in range(100):
+            random_array = np.random.rand(3)
+            r += random_array
+    print(r)
+
+    time3 = time.time()
+    time1_sum = time2 - time1
+    time2_sum = time3 - time2
+print(f"1: {time1_sum}, 2: {time2_sum}")
+"""
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+
+#     def __repr__(self):
+#         return f"Point(x={self.x}, y={self.y})"
+
+# # インスタンスの作成
+# p = Point(1, 2)
+
+# # __repr__メソッドの呼び出し
+# # print(repr(p))  # 出力: Point(x=1, y=2)
+# print(p)
+
+from openai import OpenAI
+
+client = OpenAI()
+
+response = client.images.generate(
+  model="dall-e-3",
+  prompt="a white siamese cat",
+  size="1024x1024",
+  quality="standard",
+  n=1,
+)
+
+image_url = response.data[0].url
 
 
 
