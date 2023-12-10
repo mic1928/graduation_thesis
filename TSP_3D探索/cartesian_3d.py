@@ -1,4 +1,4 @@
-from week6_haruo_3d import read_input, cal_dist, optimal_tour, calculate_total_distance, format_tour, distance, cal_shortpath
+from week6_3d import read_input, cal_dist, optimal_tour, calculate_total_distance, format_tour, distance, cal_shortpath
 
 # from solver_greedy import solve
 import time
@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from quasimc.sobol import Sobol
 from tqdm import tqdm
+import qmcpy as qp
 
 class Baseline_first:
     def __init__(self, file_number:int, dist:list, short_path:list, first_point:int=0 ,baseline_tour:list=None):
@@ -21,7 +22,7 @@ class Baseline_first:
     def calculate_baseline_tour(self):
         res_tour = optimal_tour(self.dist, self.first_point, self.short_path)
         distance = calculate_total_distance(self.dist,res_tour)
-        print(f"経路長:{distance}")
+        print(f"経路長：{distance}")
         self.baseline_tour = res_tour
         self.distance = distance
 
@@ -62,20 +63,19 @@ class Swap:
         self.dist = dist
         self.N = len(dist)
 
-    def insert_at_position(self, lst, remove_length, remove_position, insert_position):
+    def insert_at_position(self, lst_copy, remove_length, remove_position, insert_position):
         # 準備
-        lst_copy = lst.copy()
         minus = False
         if remove_length < 0:
             minus = True
             remove_length = -remove_length
-        turn = True if (remove_position + remove_length > len(lst)) else False
+        turn = (remove_position + remove_length > self.N)
         # リストから取り除く要素を取得
         double_lst = lst_copy + lst_copy
         removed_elements = double_lst[remove_position : (remove_position + remove_length)]
         # リストから要素を取り除く
         if turn:
-            lst_copy = lst_copy[(remove_position + remove_length - len(lst)):remove_position]
+            lst_copy = lst_copy[(remove_position + remove_length - self.N):remove_position]
         else:
             lst_copy = lst_copy[:remove_position] + lst_copy[(remove_position + remove_length):]
         # リストに要素を挿入する
@@ -90,7 +90,7 @@ class Swap:
             insert_first = removed_elements[0]
             insert_last = removed_elements[-1]
         return lst_copy, insert_first, insert_last, insert_before, insert_after
-    
+        
     def assign_sector(self, float1, float2, float3): #省略の工夫あり
         N = self.N
 
@@ -118,10 +118,14 @@ class Swap:
         return remove_length, remove_position, insert_position
 
     def swap_and_distance(self, random_numbers:list):
+        time1 = time.time()
         baseline_tour_copy = self.baseline_order.copy()
+        time2 = time.time()
         remove_length, remove_position, insert_position = self.assign_sector(random_numbers[0], random_numbers[1], random_numbers[2])
+        time3 = time.time()
         new_tour, insert_first, insert_last, insert_before, insert_after = \
             self.insert_at_position(baseline_tour_copy, remove_length, remove_position, insert_position)
+        time4 = time.time()
         
         # new_distance = calculate_total_distance(self.dist, new_tour)
 
@@ -132,6 +136,8 @@ class Swap:
         connect2 = self.dist[insert_first][insert_before]
         connect3 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
         new_distance = round(self.baseline_length - cut1 - cut2 - cut3 + connect1 + connect2 + connect3,5)
+        time5 = time.time()
+        # print(f"copy:{(time2-time1)*100000:.5f}, assign:{(time3-time2)*100000:.5f}, insert:{(time4-time3)*100000:.5f}, cal_dist:{(time5-time4)*100000:.5f}")
         return new_tour, new_distance
 
 class Search_in_same_baseline:
@@ -144,17 +150,28 @@ class Search_in_same_baseline:
         self.baseline_order_length = baseline_tour.length
         self.N = len(set(self.baseline_order))
         self.swap = Swap(self.baseline_tour, dist)
-        self.search_times = 100
+        self.search_times = 64
 
     # def create_3d_array(self):
     #     return Coordinate(self.N).array_3d
     
+    # def plot_sobol_points(self, num_points, box_range:list):
+    #     # 三次元にSobol乱数を生成
+    #     sobol = Sobol(3)
+    #     sobol_points = sobol.generate(num_points)
+    #     # box_rangeに合うようにsobol_pointsを線形変換
+    #     sobol_points[0] = sobol_points[0] * (box_range[0][1] - box_range[0][0]) + box_range[0][0]
+    #     sobol_points[1] = sobol_points[1] * (box_range[1][1] - box_range[1][0]) + box_range[1][0]
+    #     sobol_points[2] = sobol_points[2] * (box_range[2][1] - box_range[2][0]) + box_range[2][0]
+    #     return sobol_points.T
+
     def plot_sobol_points(self, num_points, box_range:list):
         # 二次元平面にSobol乱数を生成
-        # 引数は 次元数、 シード(任意)
-        sobol = Sobol(3)
-        sobol_points = sobol.generate(num_points)
+        # dnb2 = qp.DigitalNetB2(dimension=3,randomize='LMS_DS',graycode=True)
+        dnb2 = qp.DigitalNetB2(dimension=3,randomize='DS',graycode=True)
+        sobol_points = dnb2.gen_samples(num_points)
         # box_rangeに合うようにsobol_pointsを線形変換
+        sobol_points = sobol_points.T
         sobol_points[0] = sobol_points[0] * (box_range[0][1] - box_range[0][0]) + box_range[0][0]
         sobol_points[1] = sobol_points[1] * (box_range[1][1] - box_range[1][0]) + box_range[1][0]
         sobol_points[2] = sobol_points[2] * (box_range[2][1] - box_range[2][0]) + box_range[2][0]
@@ -180,9 +197,7 @@ class Search_in_same_baseline:
                 random_numbers = sobol_array[i]
             else:
                 random_numbers = self.random_number_in_box(box_range)
-            
             new_order, new_distance = self.swap.swap_and_distance(random_numbers)
-
             if new_distance == self.baseline_order_length:
                 new_tour = Tour(new_distance, new_order, random_numbers, box_order+1, True)
             else:
@@ -302,7 +317,7 @@ class Different_first_baseline:
         self.N = len(cities)
         self.dist = dist
         self.short_path = short_path
-        print(f"都市数：{self.N}だよ")
+        print(f"都市数：{self.N}")
 
     def search(self):
         tours_all = []
@@ -328,13 +343,12 @@ class Different_first_baseline:
 # 意味がない操作（同じところに挿入し直す）を取り除く
 
 if __name__ == '__main__':
-    file_num = 4
+    start_time = time.time()
+    file_num = 3
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
     short_path = cal_shortpath(dist)
     # short_path = None
-    # array_3d = Coordinate(len(cities)).array_3d
-    # search_times = 100
     already_baseline_length = set()
 
     dodo = Different_first_baseline(file_num, dist, short_path)
@@ -346,7 +360,7 @@ if __name__ == '__main__':
     already_baseline_length = set()
     retry_tour = Tour(last1_length, last_1.order, [0.5, 0.5, 0.5], 0, False)
     retry_top = Search_in_different_baseline(retry_tour).search_all()
-    print(f"2週目の最短経路は...:{retry_top[0].length}")
+    print(f"{2:>3}週目の最短経路は...:{retry_top[0].length}")
 
     for i in range(100):
         already_baseline_length = set()
@@ -354,16 +368,11 @@ if __name__ == '__main__':
         retry_top = Search_in_different_baseline(retry_tour).search_all()
         print(f"{i+3:>3}週目の最短経路は...:{retry_top[0].length}")
 
-    # already_baseline_length = set()
-    # retry_tour = Tour(retry_top[0].length, retry_top[0].order, [0.5, 0.5, 0.5], 0, True)
-    # retry_top = Search_in_different_baseline(retry_tour).search_all()
-
-    # print(f"4週目の最短経路は...:{retry_top[0].length}")
-
     for tour in retry_top:
         print(tour.length)
-    # top3.sort(key=lambda x: x.length)
-    # top_order = top3.copy()[0].order
     with open(f'../GoogleTSP/google-step-tsp/output_{file_num}.csv', 'w') as f:
         f.write(format_tour(retry_top[0].order) + '\n')
+    
+    end_time = time.time()
+    print(f"経過時間：{end_time - start_time:.1f}秒")
 
