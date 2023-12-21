@@ -118,25 +118,26 @@ class Swap:
         return remove_length, remove_position, insert_position
 
     def swap_and_distance(self, random_numbers:list):
-        time1 = time.time()
+        # time1 = time.time()
         baseline_tour_copy = self.baseline_order.copy()
-        time2 = time.time()
+        # time2 = time.time()
         remove_length, remove_position, insert_position = self.assign_sector(random_numbers[0], random_numbers[1], random_numbers[2])
-        time3 = time.time()
+        # time3 = time.time()
         new_tour, insert_first, insert_last, insert_before, insert_after = \
             self.insert_at_position(baseline_tour_copy, remove_length, remove_position, insert_position)
-        time4 = time.time()
+        # time4 = time.time()
         
         # new_distance = calculate_total_distance(self.dist, new_tour)
 
         cut1 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[remove_position]]
+        # print((remove_position+abs(remove_length)-1)%self.N, (remove_position+abs(remove_length))%self.N)
         cut2 = self.dist[self.baseline_order[(remove_position+abs(remove_length)-1)%self.N]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
         cut3 = self.dist[insert_before][insert_after]
         connect1 = self.dist[insert_last][insert_after]
-        connect2 = self.dist[insert_first][insert_before]
+        connect2 = self.dist[insert_before][insert_first]
         connect3 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
         new_distance = round(self.baseline_length - cut1 - cut2 - cut3 + connect1 + connect2 + connect3,5)
-        time5 = time.time()
+        # time5 = time.time()
         # print(f"copy:{(time2-time1)*100000:.5f}, assign:{(time3-time2)*100000:.5f}, insert:{(time4-time3)*100000:.5f}, cal_dist:{(time5-time4)*100000:.5f}")
         return new_tour, new_distance
 
@@ -233,7 +234,7 @@ class Search_in_same_baseline:
                     tours_all.append(tour)
         tours_all = sorted(tours_all, key=lambda x: x.length)[:5]
 
-        for i in range(5):
+        for _ in range(int(math.log10(self.N))+2):
             for tour in tours_all:
                 tours = self.search(tour)
                 for tour in tours:
@@ -347,6 +348,7 @@ if __name__ == '__main__':
     file_num = 3
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
+    # print(dist)
     short_path = cal_shortpath(dist)
     # short_path = None
     already_baseline_length = set()
