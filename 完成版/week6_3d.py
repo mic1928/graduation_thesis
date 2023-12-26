@@ -216,16 +216,44 @@ def read_atsp_file(file_path):
         for i in range(data_start_index, len(lines) - 1):
             row = list(map(int, lines[i].split()))
             numbers.extend(row)
-
-    # Extract numbers from the file name
-    dim = [int(match.group()) for match in re.finditer(r'\d+', file_path)]
-    # Convert to 17x17 2D array
-    dimension = dim[-1]
+    
+    with open(file_path, 'r') as file:
+        content = file.read()
+    # 正規表現を使用してDIMENSIONの後の数字を抽出
+    match = re.search(r'DIMENSION:\s*(\d+)', content)
+    if match:
+        dimension = int(match.group(1))
+    # Convert to 2D array
     result_2d_array = [numbers[i:i+dimension] for i in range(0, len(numbers), dimension)]
 
     return result_2d_array
 
+def read_tsp_file(file_path):
+    numbers = []
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
 
+        # Find the start of the data section
+        data_start_index = lines.index("NODE_COORD_SECTION\n") + 1
+
+        # Read data and convert to a list
+        for i in range(data_start_index, len(lines) - 1):
+            row = list(map(int, lines[i].split()))
+            numbers.extend(row)
+    
+    with open(file_path, 'r') as file:
+        content = file.read()
+    # 正規表現を使用してDIMENSIONの後の数字を抽出
+    match = re.search(r'DIMENSION : \s*(\d+)', content)
+    if match:
+        dimension = int(match.group(1))
+    # Convert to 2D array
+    result_2d_array = [numbers[i:i+3] for i in range(0, len(numbers), 3)]
+    result_2d_array = [row[1:] for row in result_2d_array]
+    assert len(result_2d_array) == dimension
+    assert len(result_2d_array[0]) == 2
+
+    return result_2d_array
 
 if __name__ == '__main__':
     start_time = time.time()
