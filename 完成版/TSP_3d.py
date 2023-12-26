@@ -156,7 +156,7 @@ class Search_in_same_baseline:
         self.baseline_order_length = baseline_tour.length
         self.N = len(set(self.baseline_order))
         self.swap = Swap(self.baseline_tour, dist)
-        self.search_times = 100
+        self.search_times = 64
 
     # def create_3d_array(self):
     #     return Coordinate(self.N).array_3d
@@ -310,7 +310,6 @@ class Different_first_baseline:
 
     def search(self):
         tours_all = []
-        start_time = time.time()
         # search_city_num = self.N//10
         search_city_num = 1
         for start in range(search_city_num):
@@ -334,7 +333,7 @@ class Different_first_baseline:
 if __name__ == '__main__':
     
     # file_num = 3
-    file_path = 'TSPlib/pr264.tsp'
+    file_path = 'TSPlib/eil101.tsp'
     cities = read_tsp_file(file_path)
     # print(cities)
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列

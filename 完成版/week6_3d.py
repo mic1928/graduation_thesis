@@ -181,7 +181,7 @@ def optimal_tour(distance_matrix, startpoint:int, short_path:list):
     # print(f"2近似アルゴリズム計算時間:{lap_time-start_time}")
     two_opt_tour = two_ap_tour
     # two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
-    # two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
+    two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
     return two_opt_tour
     # return two_ap_tour
 
@@ -214,7 +214,7 @@ def read_atsp_file(file_path):
 
         # Read data and convert to a list
         for i in range(data_start_index, len(lines) - 1):
-            row = list(map(int, lines[i].split()))
+            row = list(map(float, lines[i].split()))
             numbers.extend(row)
     
     with open(file_path, 'r') as file:
@@ -238,7 +238,7 @@ def read_tsp_file(file_path):
 
         # Read data and convert to a list
         for i in range(data_start_index, len(lines) - 1):
-            row = list(map(int, lines[i].split()))
+            row = list(map(float, lines[i].split()))
             numbers.extend(row)
     
     with open(file_path, 'r') as file:

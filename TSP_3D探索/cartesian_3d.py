@@ -345,7 +345,7 @@ class Different_first_baseline:
 
 if __name__ == '__main__':
     start_time = time.time()
-    file_num = 3
+    file_num = 4
     cities = read_input(f'input/input_{file_num}.csv')
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
     # print(dist)
