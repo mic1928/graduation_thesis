@@ -1,4 +1,4 @@
-from week6_3d import cal_dist, calculate_total_distance, read_tsp_file, optimal_tour
+from week6_3d import cal_dist, calculate_total_distance, read_tsp_file, read_atsp_file
 import time
 
 # def euclidean_distance(city1, city2):
@@ -34,11 +34,14 @@ def greedy_tsp(cost_matrix):
 
 if __name__ == '__main__':
     start_time = time.time()
-    file_path = 'TSPlib/pcb3038.tsp'
-    cities = read_tsp_file(file_path)
-    dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
+    file_path = 'ATSPlib/rbg443.atsp'
+    if file_path[-4:] == 'atsp':
+        dist = read_atsp_file(file_path)
+    else:
+        cities = read_tsp_file(file_path)
+        dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
     startpoint = 0
-    N = len(cities)
+    N = len(dist)
     greedy_tour = greedy_tsp(dist)
     print(f"経路長は{calculate_total_distance(dist, greedy_tour)}")
     end_time = time.time()

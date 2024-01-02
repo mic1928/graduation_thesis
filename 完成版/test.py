@@ -230,13 +230,53 @@ for row in result_matrix:
 
 
 
-# Replace 'path/to/br17.atsp' with the actual path to your file
-file_path = '/Users/tomo.f/Desktop/br17.atsp'
-result_numbers = read_atsp_file(file_path)
+# # Replace 'path/to/br17.atsp' with the actual path to your file
+# file_path = '/Users/tomo.f/Desktop/br17.atsp'
+# result_numbers = read_atsp_file(file_path)
 
-# Print the resulting list
-print(result_numbers)
-print(len(result_numbers[0]))
+# # Print the resulting list
+# print(result_numbers)
+# print(len(result_numbers[0]))
+
+
+from week6_3d import calculate_total_distance, read_atsp_file
+
+
+def two_opt(tour, cost_matrix):
+    num_cities = len(tour)
+    improvement = True
+
+    while improvement:
+        improvement = False
+
+        for i in range(1, num_cities - 1):
+            for j in range(i + 1, num_cities):
+                new_tour = tour[:i] + tour[i:j][::-1] + tour[j:]
+                # print(new_tour)
+                new_length = calculate_total_distance(cost_matrix, new_tour)
+
+                if new_length < calculate_total_distance(cost_matrix, tour):
+                    tour = new_tour
+                    improvement = True
+
+    return tour
+
+file_path = 'ATSPlib/ft70.atsp'
+# 例: 非対称な移動コスト
+cost_matrix = read_atsp_file(file_path)
+# print("cost_matrix",len(cost_matrix))
+
+# 例: 初期の巡回路
+initial_tour = list(range(len(cost_matrix)))
+
+# 2-opt法による改善
+optimized_tour = two_opt(initial_tour, cost_matrix)
+
+# 結果の表示
+print("Initial Tour:", initial_tour)
+print("Optimized Tour:", optimized_tour)
+print("Initial Tour Length:", calculate_total_distance(cost_matrix, initial_tour))
+print("Optimized Tour Length:", calculate_total_distance(cost_matrix, optimized_tour))
 
 
 

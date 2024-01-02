@@ -197,6 +197,7 @@ def calculate_total_distance(distance_matrix, tour):
     for i in range(num_cities - 1):
         from_city = tour_copy[i]
         to_city = tour_copy[i + 1]
+        # print(f"from_city:{from_city},to_city:{to_city}")
         total_distance += distance_matrix[from_city][to_city]
     # 最後の都市から始点に戻る距離を追加
     total_distance += distance_matrix[tour_copy[-1]][tour_copy[0]]

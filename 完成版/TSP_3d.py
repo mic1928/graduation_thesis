@@ -125,15 +125,15 @@ class Swap:
             self.insert_at_position(baseline_tour_copy, remove_length, remove_position, insert_position)
         # time4 = time.time()
         
-        new_distance = calculate_total_distance(self.dist, new_tour)
+        # new_distance = calculate_total_distance(self.dist, new_tour)
 
-        # cut1 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[remove_position]]
-        # cut2 = self.dist[self.baseline_order[(remove_position+abs(remove_length)-1)%self.N]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
-        # cut3 = self.dist[insert_before][insert_after]
-        # connect1 = self.dist[insert_last][insert_after]
-        # connect2 = self.dist[insert_before][insert_first]
-        # connect3 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
-        # new_distance = round(self.baseline_length - cut1 - cut2 - cut3 + connect1 + connect2 + connect3,5)
+        cut1 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[remove_position]]
+        cut2 = self.dist[self.baseline_order[(remove_position+abs(remove_length)-1)%self.N]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
+        cut3 = self.dist[insert_before][insert_after]
+        connect1 = self.dist[insert_last][insert_after]
+        connect2 = self.dist[insert_before][insert_first]
+        connect3 = self.dist[self.baseline_order[remove_position-1]][self.baseline_order[(remove_position+abs(remove_length))%self.N]]
+        new_distance = round(self.baseline_length - cut1 - cut2 - cut3 + connect1 + connect2 + connect3,5)
 
         # if new_distance != new_precise_distance:
         #     print(f"new_distance:{new_distance}, new_precise_distance:{new_precise_distance}")
@@ -277,7 +277,7 @@ class Search_in_different_baseline:
         tours_all = [self.first_baseline_tour]
         last_length = 0
         last_2_length = 0
-        for i in range(100):
+        for i in range(200):
             tours = self.search(tours_all)
             for tour in tours:
                 if all(tour_all.length != tour.length for tour_all in tours_all):
@@ -333,12 +333,11 @@ class Different_first_baseline:
 if __name__ == '__main__':
     
     # file_num = 3
-    file_path = 'TSPlib/eil101.tsp'
+    file_path = 'TSPlib/pcb3038.tsp'
     cities = read_tsp_file(file_path)
     # print(cities)
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
 
-    
     # print(dist)
     # short_path = cal_shortpath(dist)
     short_path = None
