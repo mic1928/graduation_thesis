@@ -19,7 +19,8 @@ class Baseline_first:
         self.calculate_baseline_tour()
 
     def calculate_baseline_tour(self):
-        res_tour = optimal_tour(self.dist, self.first_point, self.short_path)
+        # res_tour = optimal_tour(self.dist, self.first_point, self.short_path)
+        res_tour = list(np.random.permutation(self.num_cities))
         distance = calculate_total_distance(self.dist,res_tour)
         print(f"経路長：{distance}")
         self.baseline_tour = res_tour
@@ -259,18 +260,18 @@ class Search_in_different_baseline:
         # tours_all = [self.first_baseline_tour]
         tours_all_copy = tours_all.copy()
         for i, tour in enumerate(tours_all_copy):
-            if tour.already_baseline == True:
-                continue
-            if tour.length in already_baseline_length:
-                continue
+            # if tour.already_baseline == True:
+            #     continue
+            # if tour.length in already_baseline_length:
+            #     continue
             tours = Search_in_same_baseline(tour).search_all()
             for tour in tours:
-                if all(tour_all.length != tour.length for tour_all in tours_all):
+                # if all(tour_all.length != tour.length for tour_all in tours_all):
                     tours_all_copy.append(tour)
-            tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)[:1]
+            tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)
             # print(f"i:{i:>2}番目, length:{tours_all_copy[0].length}, random_number:{tours_all_copy[0].random_number}, box_order:{tours_all_copy[0].box_order}")
         # return sorted(tours_all_copy, key=lambda x: x.length)[:1]
-        return tours_all_copy
+        return tours_all_copy[:10]
     
     def search_all(self):
         self.first_baseline_tour.already_baseline = False
@@ -280,21 +281,19 @@ class Search_in_different_baseline:
         for i in range(200):
             tours = self.search(tours_all)
             for tour in tours:
-                if all(tour_all.length != tour.length for tour_all in tours_all):
-                    # if tour.length in already_baseline_length:
-                    #     continue
+                # if all(tour_all.length != tour.length for tour_all in tours_all):
                     tours_all.append(tour)
-            tours_all = sorted(tours_all, key=lambda x: x.length)[:1]
+            tours_all = sorted(tours_all, key=lambda x: x.length)[:10]
             print(f"i:{i:>2}, length:{tours_all[0].length:<12}, tours_all_len:{len(tours_all)},\
             num_True:{sum(tour_all.already_baseline == True for tour_all in tours_all)},\
             num_already_baseline:{sum(tour_all.length in already_baseline_length for tour_all in tours_all)}")
             
-            if all(tour_all.already_baseline == True for tour_all in tours_all):
-                break
-            if all(tour_all.length in already_baseline_length for tour_all in tours_all):
-                break
-            if last_2_length == tours_all[0].length:
-                break
+            # if all(tour_all.already_baseline == True for tour_all in tours_all):
+            #     break
+            # if all(tour_all.length in already_baseline_length for tour_all in tours_all):
+            #     break
+            # if last_2_length == tours_all[0].length:
+            #     break
             last_2_length = last_length
             last_length = tours_all[0].length
         return tours_all
@@ -333,7 +332,7 @@ class Different_first_baseline:
 if __name__ == '__main__':
     
     # file_num = 3
-    file_path = 'TSPlib/pcb3038.tsp'
+    file_path = 'TSPlib/eil101.tsp'
     cities = read_tsp_file(file_path)
     # print(cities)
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
