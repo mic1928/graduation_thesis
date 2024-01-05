@@ -1,3 +1,6 @@
+# 使わない
+
+
 from week6_3d import cal_dist, calculate_total_distance, read_tsp_file, tsp_approximation, minimum_spanning_tree, read_atsp_file
 import time
 
@@ -12,9 +15,9 @@ import numpy as np
 if __name__ == '__main__':
     start_time = time.time()
     # file_path = 'ATSPlib/ft70.atsp'
-    # file_path = 'TSPlib/eil101.tsp'
+    file_path = 'TSPlib/eil101.tsp'
     # file_path = 'TSPlib/pr264.tsp'
-    file_path = 'TSPlib/d1655.tsp'
+    # file_path = 'TSPlib/d1655.tsp'
     
     if file_path[-4:] == 'atsp':
         dist = read_atsp_file(file_path)
@@ -25,7 +28,6 @@ if __name__ == '__main__':
     N = len(dist)
 
     two_ap_tour = list(np.random.permutation(N))
-    print(len(two_ap_tour),N)
     two_ap_tour_length = calculate_total_distance(dist, two_ap_tour)
     # spanning_tree = minimum_spanning_tree(dist, startpoint, N) #最小全域木を生成
     # two_ap_tour = tsp_approximation(spanning_tree, startpoint)
