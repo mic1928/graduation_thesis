@@ -169,7 +169,7 @@ def two_opt_classic(tour, dist):
     return tour
 
 
-def optimal_tour(distance_matrix, startpoint:int, short_path:list):
+def optimal_tour(distance_matrix, startpoint:int, short_path:list, is_atsp:bool=False):
     N = len(distance_matrix)
     if startpoint is None:
         random.seed(42)  # ランダムシードを42に設定
@@ -180,8 +180,9 @@ def optimal_tour(distance_matrix, startpoint:int, short_path:list):
     # lap_time = time.time()
     # print(f"2近似アルゴリズム計算時間:{lap_time-start_time}")
     two_opt_tour = two_ap_tour
-    # two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
-    two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
+    if not is_atsp:
+        # two_opt_tour = two_opt_update(two_ap_tour, distance_matrix, short_path)   #2-optアルゴリズム
+        two_opt_tour = two_opt_classic(two_ap_tour, distance_matrix)   #2-optアルゴリズム
     return two_opt_tour
     # return two_ap_tour
 
