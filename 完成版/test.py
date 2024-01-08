@@ -238,7 +238,7 @@ for row in result_matrix:
 # print(result_numbers)
 # print(len(result_numbers[0]))
 
-
+"""
 from week6_3d import calculate_total_distance, read_atsp_file
 
 
@@ -277,8 +277,66 @@ print("Initial Tour:", initial_tour)
 print("Optimized Tour:", optimized_tour)
 print("Initial Tour Length:", calculate_total_distance(cost_matrix, initial_tour))
 print("Optimized Tour Length:", calculate_total_distance(cost_matrix, optimized_tour))
+"""
+
+# def solve_tsp_simulated_annealing(
+#     distance_matrix: np.ndarray,
+#     x0: Optional[List[int]] = None,
+#     perturbation_scheme: str = "two_opt",
+#     alpha: float = 0.9,
+#     max_processing_time: Optional[float] = None,
+#     log_file: Optional[str] = None,
+#     verbose: bool = False,
+# ) -> Tuple[List, float]:
 
 
+#     x, fx = setup_initial_solution(distance_matrix, x0)
+#     temp = _initial_temperature(distance_matrix, x, fx, perturbation_scheme)
+#     max_processing_time = max_processing_time or inf
+#     log_file_handler = (
+#         open(log_file, "w", encoding="utf-8") if log_file else None
+#     )
 
+#     n = len(x)
+#     k_inner_min = n
+#     k_inner_max = MAX_INNER_ITERATIONS_MULTIPLIER * n
+#     k_noimprovements = 0  # number of inner loops without improvement
+
+#     tic = default_timer()
+#     stop_early = False
+#     while (k_noimprovements < MAX_NON_IMPROVEMENTS) and (not stop_early):
+#         k_accepted = 0  # number of accepted perturbations
+#         for k in range(k_inner_max):
+#             if default_timer() - tic > max_processing_time:
+#                 _print_message(TIME_LIMIT_MSG, verbose, log_file_handler)
+#                 stop_early = True
+#                 break
+
+#             xn = _perturbation(x, perturbation_scheme)
+#             fn = compute_permutation_distance(distance_matrix, xn)
+
+#             if _acceptance_rule(fx, fn, temp):
+#                 x, fx = xn, fn
+#                 k_accepted += 1
+#                 k_noimprovements = 0
+
+#             msg = (
+#                 f"Temperature {temp}. Current value: {fx} "
+#                 f"k: {k + 1}/{k_inner_max} "
+#                 f"k_accepted: {k_accepted}/{k_inner_min} "
+#                 f"k_noimprovements: {k_noimprovements}"
+#             )
+#             _print_message(msg, verbose, log_file_handler)
+
+#             if k_accepted >= k_inner_min:
+#                 break
+
+#         temp *= alpha  # temperature update
+#         k_noimprovements += k_accepted == 0
+
+#     if log_file_handler:
+#         log_file_handler.close()
+
+#     return x, fx
 
 

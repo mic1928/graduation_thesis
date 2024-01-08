@@ -157,7 +157,7 @@ class Search_in_same_baseline:
         self.baseline_order_length = baseline_tour.length
         self.N = len(set(self.baseline_order))
         self.swap = Swap(self.baseline_tour, dist)
-        self.search_times = 64
+        self.search_times = 100
     
     # def plot_sobol_points(self, num_points, box_range:list):
     #     # 三次元にSobol乱数を生成
@@ -280,7 +280,7 @@ class Search_in_different_baseline:
 # 意味がない操作（同じところに挿入し直す）を取り除く
 
 if __name__ == '__main__':
-    file_path = 'TSPlib/eil101.tsp'
+    file_path = 'TSPlib/pcb3038.tsp'
     cities = read_tsp_file(file_path)
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
 

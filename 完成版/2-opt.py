@@ -22,7 +22,8 @@ def two_opt(tour, cost_matrix):
 
 if __name__ == '__main__':
     start_time = time.time()
-    file_path = 'ATSPlib/rbg443.atsp'
+    # file_path = 'ATSPlib/rbg443.atsp'
+    file_path = 'ATSPlib/rbg323.atsp'
     if file_path[-4:] == 'atsp':
         dist = read_atsp_file(file_path)
         startpoint = 0
