@@ -339,21 +339,29 @@ print("Optimized Tour Length:", calculate_total_distance(cost_matrix, optimized_
 
 #     return x, fx
 
+
+"""
 import matplotlib.pyplot as plt
 
 # 入力例
-cities = [101, 249, 589, 1049, 3085]
-execution_times = [[0.4, 2.5, 6.5, 10.6, 39.7], [0.6, 2.5, 6.7, 10.3, 39.9]]
-labels = ["提案手法","Nearest Neighbor","2-app","Simulated Annealing","2-opt","Lin-Kernighan"]
+cities = [101, 264, 318, 654, 1655]
+# cities = [39, 70, 323, 358, 443]
+execution_times = [[0.004 , 0.03 , 0.04 , 0.2 , 1.0], [0.008 , 0.05 , 0.07 , 0.3 , 2.0],[4.2 , 47.9 , 75.3 , 603.4 , 5264.4],[0.02 , 0.2 , 0.9 , 8.1 , 150.4],[0.2 , 2.9 , 4.5 , 40.3 , 3853.3],[984.8 , 1918.2 , 2435.3 , 7926.9 , 29032.1]]
+# execution_times = [[0.001 , 0.002 , 0.03 , 0.05 , 0.07], [0.002 , 0.005 , 0.05 , 0.07 , 0.1],[0.5 , 1.8 , 47.7 , 62.7 , 113.7],[0.03 , 0.1 , 17.8 , 25.4 , 50.7],[386.3 , 804.6 , 1050.6 , 1259.4 , 1467.7]]
+labels = ["Nearest Neighbor","2-app","Simulated Annealing","2-opt","Lin-Kernighan","Relaxation"]
+# labels = ["Nearest Neighbor","2-app","Simulated Annealing","2-opt","Relaxation"]
 
 # グラフの描画
 plt.figure(figsize=(8, 6))
 
 # 各系列のプロット
 for i, series in enumerate(execution_times):
-    plt.scatter(cities, series, label=f'Series {i+1}', marker='o')  # マーカーを変更する場合は'o'を変更
+    # plt.scatter(cities, series, label=labels[i], marker='o')  # マーカーを変更する場合は'o'を変更
+    plt.plot(cities, series, label=labels[i], marker='o', linestyle='-')
 
 # 軸ラベルとタイトルの設定
+plt.xscale('log')
+plt.yscale('log')
 plt.xlabel('Number of Cities')
 plt.ylabel('Execution Time (seconds)')
 # plt.title('Relationship between the number of cities and execution time')
@@ -366,4 +374,66 @@ plt.grid(True)
 
 # グラフの表示
 plt.show()
+"""
 
+# file_path = "/Users/tomo.f/Desktop/卒論/完成版/実行結果/提案手法/eil101_tsp.txt"
+# file_path = "/Users/tomo.f/Desktop/卒論/完成版/実行結果/提案手法/pr264_tsp.txt"
+# file_path = "/Users/tomo.f/Desktop/卒論/完成版/実行結果/提案手法/lin318_tsp.txt"
+# file_path = "/Users/tomo.f/Desktop/卒論/完成版/実行結果/提案手法/p654_tsp.txt"
+# file_path = "/Users/tomo.f/Desktop/卒論/完成版/実行結果/提案手法/d1655_tsp.txt"
+file_path = "/Users/tomo.f/Desktop/卒論/完成版/実行結果/提案手法/rbg443_atsp.txt"
+
+try:
+    with open(file_path, 'r') as file:
+        # ファイルから全ての行を読み込んでリストに格納
+        content = file.readlines()
+
+    length_list = []
+    time_list = []
+    for line in content:
+        if line[0] != "i":
+            continue
+        else:
+            length_list.append(float(line.split('length:')[1].split(' ')[0]))
+            time_list.append(float(line.split('lap_time:')[1]))
+
+    length_list = length_list[:200]
+    time_list = time_list[:200]
+            
+
+
+    print(length_list)
+    print(len(length_list))
+    print(time_list)
+    print(len(time_list))
+
+except FileNotFoundError:
+    print(f"指定されたファイル '{file_path}' が見つかりませんでした。")
+except Exception as e:
+    print(f"エラーが発生しました: {e}")
+
+import matplotlib.pyplot as plt
+
+def plot_line_chart(x_values, y_values):
+    """
+    x_values: x軸の値を格納したリスト
+    y_values: y軸の値を格納したリスト
+    x_label: x軸のラベル
+    y_label: y軸のラベル
+    title: グラフのタイトル
+    """
+    plt.plot(x_values, y_values, linestyle='-', label='Relaxation')
+    # plt.axhline(y=629, color='r', linestyle='--', label='Exact Solution')
+    # plt.axhline(y=49135, color='r', linestyle='--', label='Exact Solution')
+    # plt.axhline(y=42029, color='r', linestyle='--', label='Exact Solution')
+    # plt.axhline(y=34643, color='r', linestyle='--', label='Exact Solution')
+    # plt.axhline(y=62128, color='r', linestyle='--', label='Exact Solution')
+    plt.axhline(y=2720, color='r', linestyle='--', label='Exact Solution')
+    plt.xlabel("Execution Time (seconds)")
+    plt.ylabel("Tour Length")
+    # plt.title(title)
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+plot_line_chart(time_list, length_list)

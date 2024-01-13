@@ -258,7 +258,17 @@ class Search_in_different_baseline:
 # 意味がない操作（同じところに挿入し直す）を取り除く
 
 if __name__ == '__main__':
-    file_path = 'ATSPlib/rbg443.atsp'
+    # file_path = 'ATSPlib/ftv38.atsp'
+    # file_path = 'ATSPlib/rbg443.atsp'
+    # file_path = 'ATSPlib/ft70.atsp'
+    # file_path = 'ATSPlib/rbg323.atsp'
+    file_path = 'ATSPlib/rbg358.atsp'
+    # file_path = 'TSPlib/eil101.tsp'
+    # file_path = 'TSPlib/pr264.tsp'
+    # file_path = 'TSPlib/d1655.tsp'
+    # file_path = 'TSPlib/lin318.tsp'
+    # file_path = 'TSPlib/p654.tsp'
+
     dist = read_atsp_file(file_path)
     # N = len(dist)
 

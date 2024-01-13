@@ -18,11 +18,11 @@ import numpy as np
 
 if __name__ == '__main__':
     start_time = time.time()
-    # file_path = 'ATSPlib/ftv38.atsp'
+    file_path = 'ATSPlib/ftv38.atsp'
     # file_path = 'ATSPlib/rbg443.atsp'
     # file_path = 'ATSPlib/ft70.atsp'
-    file_path = 'ATSPlib/rbg323.atsp'
-    # file_path = 'TSPlib/rbg358.atsp'
+    # file_path = 'ATSPlib/rbg323.atsp'
+    # file_path = 'ATSPlib/rbg358.atsp'
     # file_path = 'TSPlib/eil101.tsp'
     # file_path = 'TSPlib/pr264.tsp'
     # file_path = 'TSPlib/d1655.tsp'

@@ -19,7 +19,7 @@ class Baseline_first:
         self.calculate_baseline_tour()
 
     def calculate_baseline_tour(self):
-        res_tour = optimal_tour(self.dist, self.first_point, self.short_path)
+        res_tour = optimal_tour(self.dist, self.first_point, self.short_path, True)
         # res_tour = list(np.random.permutation(self.num_cities))
         distance = calculate_total_distance(self.dist,res_tour)
         print(f"経路長：{distance}")
@@ -288,12 +288,12 @@ if __name__ == '__main__':
 
     # file_path = 'ATSPlib/ftv38.atsp'
     # file_path = 'TSPlib/eil101.tsp'
-    file_path = 'TSPlib/pr264.tsp'
+    # file_path = 'TSPlib/pr264.tsp'
     # file_path = 'TSPlib/d1655.tsp'
     # file_path = 'TSPlib/pcb3038.tsp'
     # file_path = 'TSPlib/st70.tsp'
     # file_path = 'TSPlib/lin318.tsp'
-    # file_path = 'TSPlib/p654.tsp'
+    file_path = 'TSPlib/p654.tsp'
 
     cities = read_tsp_file(file_path)
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
