@@ -231,7 +231,8 @@ class Search_in_different_baseline:
         for tour in tours_all_copy:
             tours = Search_in_same_baseline(tour).search_all()
             for tour in tours:
-                tours_all_copy.append(tour)
+                if all(tour_all.length != tour.length for tour_all in tours_all):
+                    tours_all_copy.append(tour)
             tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)
         return tours_all_copy[:10]
     

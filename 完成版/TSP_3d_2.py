@@ -254,7 +254,8 @@ class Search_in_different_baseline:
         for tour in tours_all_copy:
             tours = Search_in_same_baseline(tour).search_all()
             for tour in tours:
-                tours_all_copy.append(tour)
+                if all(tour_all.length != tour.length for tour_all in tours_all):
+                    tours_all_copy.append(tour)
             tours_all_copy = sorted(tours_all_copy, key=lambda x: x.length)
         return tours_all_copy[:10]
     
@@ -265,12 +266,16 @@ class Search_in_different_baseline:
         for i in range(200):
             tours = self.search(tours_all)
             for tour in tours:
-                tours_all.append(tour)
+                if all(tour_all.length != tour.length for tour_all in tours_all):
+                    tours_all.append(tour)
             tours_all = sorted(tours_all, key=lambda x: x.length)[:10]
             lap_time = time.time() - start_time
-            print(f"i:{i:>2}, length:{tours_all[0].length:<12}, tours_all_len:{len(tours_all)},\
-            num_True:{sum(tour_all.already_baseline == True for tour_all in tours_all)},\
-            num_already_baseline:{sum(tour_all.length in already_baseline_length for tour_all in tours_all)}\
+            # print(f"i:{i:>2}, length:{tours_all[0].length:<12}, tours_all_len:{len(tours_all)},\
+            # num_True:{sum(tour_all.already_baseline == True for tour_all in tours_all)},\
+            # num_already_baseline:{sum(tour_all.length in already_baseline_length for tour_all in tours_all)}\
+            # lap_time:{lap_time:.5f}")
+            print(f"i:{i:>3}, length:{tours_all[0].length:<12}, length_2:{tours_all[1].length:<12}, length_3:{tours_all[2].length:<12}\
+            num_True:{sum(tour_all.already_baseline == True for tour_all in tours_all):<3},\
             lap_time:{lap_time:.5f}")
         return tours_all
         
@@ -280,7 +285,16 @@ class Search_in_different_baseline:
 # 意味がない操作（同じところに挿入し直す）を取り除く
 
 if __name__ == '__main__':
-    file_path = 'TSPlib/pcb3038.tsp'
+
+    # file_path = 'ATSPlib/ftv38.atsp'
+    # file_path = 'TSPlib/eil101.tsp'
+    file_path = 'TSPlib/pr264.tsp'
+    # file_path = 'TSPlib/d1655.tsp'
+    # file_path = 'TSPlib/pcb3038.tsp'
+    # file_path = 'TSPlib/st70.tsp'
+    # file_path = 'TSPlib/lin318.tsp'
+    # file_path = 'TSPlib/p654.tsp'
+
     cities = read_tsp_file(file_path)
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
 

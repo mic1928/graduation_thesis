@@ -339,4 +339,31 @@ print("Optimized Tour Length:", calculate_total_distance(cost_matrix, optimized_
 
 #     return x, fx
 
+import matplotlib.pyplot as plt
+
+# 入力例
+cities = [101, 249, 589, 1049, 3085]
+execution_times = [[0.4, 2.5, 6.5, 10.6, 39.7], [0.6, 2.5, 6.7, 10.3, 39.9]]
+labels = ["提案手法","Nearest Neighbor","2-app","Simulated Annealing","2-opt","Lin-Kernighan"]
+
+# グラフの描画
+plt.figure(figsize=(8, 6))
+
+# 各系列のプロット
+for i, series in enumerate(execution_times):
+    plt.scatter(cities, series, label=f'Series {i+1}', marker='o')  # マーカーを変更する場合は'o'を変更
+
+# 軸ラベルとタイトルの設定
+plt.xlabel('Number of Cities')
+plt.ylabel('Execution Time (seconds)')
+# plt.title('Relationship between the number of cities and execution time')
+
+# 凡例の表示
+plt.legend()
+
+# グリッドの表示
+plt.grid(True)
+
+# グラフの表示
+plt.show()
 

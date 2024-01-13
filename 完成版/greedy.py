@@ -1,10 +1,6 @@
 from week6_3d import cal_dist, calculate_total_distance, read_tsp_file, read_atsp_file
 import time
 
-# def euclidean_distance(city1, city2):
-#     """ユークリッド距離を計算する関数"""
-#     return ((city1[0] - city2[0])**2 + (city1[1] - city2[1])**2)**0.5
-
 def greedy_tsp(cost_matrix):
     num_cities = len(cost_matrix)
     unvisited_cities = set(range(num_cities))
@@ -23,18 +19,19 @@ def greedy_tsp(cost_matrix):
 
     return tour
 
-# # 入力例
-# # cost_matrix = [[0, 1, 2, 4], [5, 0, 6, 10], [8, 6, 0, 4], [1, 2, 3, 0]]
-
-# # Greedy法による解の取得
-# tour = greedy_tsp(cost_matrix)
-
-# # 結果の表示
-# print("Optimal Tour:", tour)
-
 if __name__ == '__main__':
     start_time = time.time()
-    file_path = 'ATSPlib/rbg443.atsp'
+
+    # file_path = 'ATSPlib/rbg443.atsp'
+    # file_path = 'ATSPlib/ftv38.atsp'
+    # file_path = 'TSPlib/eil101.tsp'
+    # file_path = 'TSPlib/pr264.tsp'
+    file_path = 'TSPlib/d1655.tsp'
+    # file_path = 'TSPlib/pcb3038.tsp'
+    # file_path = 'TSPlib/st70.tsp'
+    # file_path = 'TSPlib/lin318.tsp'
+    # file_path = 'TSPlib/p654.tsp'
+
     if file_path[-4:] == 'atsp':
         dist = read_atsp_file(file_path)
     else:
