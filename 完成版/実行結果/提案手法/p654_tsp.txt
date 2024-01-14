@@ -403,3 +403,205 @@ i:196, length:34874.68553 , length_2:34874.68554 , length_3:34874.78141         
 i:197, length:34874.68553 , length_2:34874.68554 , length_3:34874.78141             num_True:10 ,            lap_time:6084.28559
 i:198, length:34874.68553 , length_2:34874.68554 , length_3:34874.78141             num_True:10 ,            lap_time:6114.78582
 i:199, length:34874.68553 , length_2:34874.68554 , length_3:34874.78141             num_True:10 ,            lap_time:6144.14884
+
+経路長：49731.89542
+i:  0, length:47451.10955 , length_2:47863.65643 , length_3:48040.86325             num_True:0  ,            lap_time:20.42979
+i:  1, length:46406.4762  , length_2:46550.66981 , length_3:46581.57076             num_True:0  ,            lap_time:59.42468
+i:  2, length:45247.46929 , length_2:45248.50479 , length_3:45249.85566             num_True:1  ,            lap_time:125.63739
+i:  3, length:44624.95167 , length_2:44660.72149 , length_3:44749.27273             num_True:0  ,            lap_time:171.97878
+i:  4, length:44025.47368 , length_2:44026.33498 , length_3:44090.97328             num_True:1  ,            lap_time:217.04089
+i:  5, length:43534.91953 , length_2:43611.71122 , length_3:43652.04726             num_True:0  ,            lap_time:259.10792
+i:  6, length:43012.63129 , length_2:43020.54352 , length_3:43040.39273             num_True:0  ,            lap_time:301.18068
+i:  7, length:42234.23945 , length_2:42234.55491 , length_3:42277.18652             num_True:0  ,            lap_time:344.60305
+i:  8, length:41736.22792 , length_2:41846.9971  , length_3:41986.83911             num_True:3  ,            lap_time:388.62553
+i:  9, length:41404.69866 , length_2:41451.12565 , length_3:41453.80873             num_True:0  ,            lap_time:428.05523
+i: 10, length:41281.1561  , length_2:41299.04787 , length_3:41299.15158             num_True:3  ,            lap_time:472.91614
+i: 11, length:40997.36562 , length_2:41007.44841 , length_3:41098.70813             num_True:1  ,            lap_time:513.14616
+i: 12, length:40356.99644 , length_2:40663.50839 , length_3:40690.24386             num_True:0  ,            lap_time:550.26124
+i: 13, length:40304.34764 , length_2:40304.57392 , length_3:40304.69136             num_True:0  ,            lap_time:584.64559
+i: 14, length:40171.35967 , length_2:40190.27465 , length_3:40224.61258             num_True:1  ,            lap_time:623.87254
+i: 15, length:40027.79791 , length_2:40080.05749 , length_3:40092.81865             num_True:3  ,            lap_time:665.50811
+i: 16, length:39831.5609  , length_2:39832.02657 , length_3:39891.06569             num_True:0  ,            lap_time:700.80000
+i: 17, length:39801.9968  , length_2:39805.80561 , length_3:39818.23202             num_True:1  ,            lap_time:734.64952
+i: 18, length:39695.10952 , length_2:39702.9503  , length_3:39723.52547             num_True:0  ,            lap_time:771.26962
+i: 19, length:39523.62442 , length_2:39599.08454 , length_3:39625.9125              num_True:0  ,            lap_time:809.08445
+i: 20, length:39407.1988  , length_2:39416.25254 , length_3:39490.55138             num_True:1  ,            lap_time:844.27847
+i: 21, length:39345.37232 , length_2:39362.43682 , length_3:39368.71897             num_True:0  ,            lap_time:872.23584
+i: 22, length:39244.32822 , length_2:39293.97645 , length_3:39299.49316             num_True:0  ,            lap_time:905.43336
+i: 23, length:39148.92189 , length_2:39187.64721 , length_3:39204.56367             num_True:0  ,            lap_time:935.12853
+i: 24, length:39104.31789 , length_2:39131.11751 , length_3:39139.46414             num_True:7  ,            lap_time:964.55686
+i: 25, length:38940.83655 , length_2:38986.26488 , length_3:38992.87236             num_True:0  ,            lap_time:994.40454
+i: 26, length:38892.29553 , length_2:38905.07315 , length_3:38906.07244             num_True:3  ,            lap_time:1027.39040
+i: 27, length:38703.65094 , length_2:38715.64816 , length_3:38739.89872             num_True:2  ,            lap_time:1060.19162
+i: 28, length:38515.13043 , length_2:38703.22175 , length_3:38703.65094             num_True:2  ,            lap_time:1096.61445
+i: 29, length:38487.12162 , length_2:38500.22903 , length_3:38506.34364             num_True:3  ,            lap_time:1130.44938
+i: 30, length:38465.32225 , length_2:38477.74866 , length_3:38481.68801             num_True:5  ,            lap_time:1174.22839
+i: 31, length:38406.90515 , length_2:38412.88033 , length_3:38425.28615             num_True:3  ,            lap_time:1210.79908
+i: 32, length:38286.66563 , length_2:38301.04363 , length_3:38342.45389             num_True:3  ,            lap_time:1243.34226
+i: 33, length:38246.65012 , length_2:38248.21545 , length_3:38254.33006             num_True:1  ,            lap_time:1273.19882
+i: 34, length:38106.14206 , length_2:38152.53739 , length_3:38175.13518             num_True:3  ,            lap_time:1306.47312
+i: 35, length:38093.71565 , length_2:38093.87269 , length_3:38100.72464             num_True:8  ,            lap_time:1335.22240
+i: 36, length:38044.60828 , length_2:38054.35316 , length_3:38076.14206             num_True:4  ,            lap_time:1363.79171
+i: 37, length:38020.56948 , length_2:38040.81526 , length_3:38044.60828             num_True:5  ,            lap_time:1391.97027
+i: 38, length:38010.25749 , length_2:38016.3721  , length_3:38020.56948             num_True:6  ,            lap_time:1420.02249
+i: 39, length:37976.65013 , length_2:37978.03665 , length_3:37997.47683             num_True:3  ,            lap_time:1449.01406
+i: 40, length:37967.74039 , length_2:37971.92204 , length_3:37976.65013             num_True:2  ,            lap_time:1477.67999
+i: 41, length:37946.52719 , length_2:37955.31398 , length_3:37955.82493             num_True:6  ,            lap_time:1505.03688
+i: 42, length:37925.51116 , length_2:37931.15577 , length_3:37931.42859             num_True:3  ,            lap_time:1533.07536
+i: 43, length:37891.69929 , length_2:37893.1031  , length_3:37909.64232             num_True:1  ,            lap_time:1561.67776
+i: 44, length:37879.27288 , length_2:37891.69929 , length_3:37893.1031              num_True:6  ,            lap_time:1589.36992
+i: 45, length:37816.96917 , length_2:37820.70807 , length_3:37823.08378             num_True:1  ,            lap_time:1616.30434
+i: 46, length:37794.83842 , length_2:37798.49972 , length_3:37802.51836             num_True:2  ,            lap_time:1644.35704
+i: 47, length:37767.06235 , length_2:37770.43406 , length_3:37771.10215             num_True:3  ,            lap_time:1672.14342
+i: 48, length:37745.26103 , length_2:37750.50817 , length_3:37751.37564             num_True:3  ,            lap_time:1699.99191
+i: 49, length:37723.85131 , length_2:37729.96592 , length_3:37742.39233             num_True:4  ,            lap_time:1726.22388
+i: 50, length:37704.16757 , length_2:37709.28425 , length_3:37712.39233             num_True:3  ,            lap_time:1753.94984
+i: 51, length:37689.59524 , length_2:37692.26743 , length_3:37697.71109             num_True:2  ,            lap_time:1782.69228
+i: 52, length:37571.88419 , length_2:37584.3106  , length_3:37590.42521             num_True:6  ,            lap_time:1811.92361
+i: 53, length:37548.19599 , length_2:37566.90639 , length_3:37571.88419             num_True:5  ,            lap_time:1838.80370
+i: 54, length:37536.73701 , length_2:37542.55514 , length_3:37548.19599             num_True:7  ,            lap_time:1867.07862
+i: 55, length:37520.90109 , length_2:37531.26354 , length_3:37531.51847             num_True:7  ,            lap_time:1896.01126
+i: 56, length:37496.24545 , length_2:37510.30527 , length_3:37517.45866             num_True:6  ,            lap_time:1924.65483
+i: 57, length:37470.69396 , length_2:37477.38613 , length_3:37482.49662             num_True:6  ,            lap_time:1953.13565
+i: 58, length:37465.06324 , length_2:37470.69396 , length_3:37473.06967             num_True:10 ,            lap_time:1980.59221
+i: 59, length:37399.72338 , length_2:37414.31804 , length_3:37447.62948             num_True:3  ,            lap_time:2009.00165
+i: 60, length:37399.72338 , length_2:37404.41047 , length_3:37411.64586             num_True:6  ,            lap_time:2037.30118
+i: 61, length:37345.23117 , length_2:37357.65757 , length_3:37360.32976             num_True:5  ,            lap_time:2065.13949
+i: 62, length:37305.0226  , length_2:37305.40863 , length_3:37342.65104             num_True:4  ,            lap_time:2093.30271
+i: 63, length:37305.0226  , length_2:37305.40863 , length_3:37316.86761             num_True:6  ,            lap_time:2121.78952
+i: 64, length:37283.95277 , length_2:37288.7075  , length_3:37291.85938             num_True:2  ,            lap_time:2150.25097
+i: 65, length:37229.94573 , length_2:37268.08393 , length_3:37275.66192             num_True:3  ,            lap_time:2177.68110
+i: 66, length:37187.51932 , length_2:37208.73252 , length_3:37217.51932             num_True:7  ,            lap_time:2205.89697
+i: 67, length:37187.51932 , length_2:37208.73252 , length_3:37208.76249             num_True:7  ,            lap_time:2235.02483
+i: 68, length:37168.48781 , length_2:37179.57699 , length_3:37179.577               num_True:7  ,            lap_time:2262.48176
+i: 69, length:37141.16    , length_2:37149.3347  , length_3:37149.94679             num_True:5  ,            lap_time:2290.01136
+i: 70, length:37141.16    , length_2:37143.87542 , length_3:37146.5476              num_True:7  ,            lap_time:2317.26833
+i: 71, length:37139.0074  , length_2:37140.5479  , length_3:37141.16                num_True:7  ,            lap_time:2343.95711
+i: 72, length:37118.93451 , length_2:37121.61701 , length_3:37123.75488             num_True:4  ,            lap_time:2371.69137
+i: 73, length:37100.40381 , length_2:37107.54943 , length_3:37116.33623             num_True:3  ,            lap_time:2399.46900
+i: 74, length:37100.40381 , length_2:37100.47569 , length_3:37106.75348             num_True:4  ,            lap_time:2423.77206
+i: 75, length:37094.66368 , length_2:37099.57285 , length_3:37100.40381             num_True:7  ,            lap_time:2450.15255
+i: 76, length:37087.14644 , length_2:37094.66368 , length_3:37098.76263             num_True:6  ,            lap_time:2479.01835
+i: 77, length:37085.87688 , length_2:37087.14644 , length_3:37091.36254             num_True:3  ,            lap_time:2513.14597
+i: 78, length:37081.03183 , length_2:37085.87688 , length_3:37086.38038             num_True:7  ,            lap_time:2545.73313
+i: 79, length:37036.60905 , length_2:37066.41167 , length_3:37076.93406             num_True:4  ,            lap_time:2579.18328
+i: 80, length:36998.1594  , length_2:37031.31323 , length_3:37033.30379             num_True:5  ,            lap_time:2613.92976
+i: 81, length:36968.83035 , length_2:36981.25676 , length_3:36984.65595             num_True:6  ,            lap_time:2651.85028
+i: 82, length:36943.58487 , length_2:36950.50111 , length_3:36951.57451             num_True:6  ,            lap_time:2687.37180
+i: 83, length:36941.08123 , length_2:36941.33446 , length_3:36943.58487             num_True:6  ,            lap_time:2723.28385
+i: 84, length:36939.71804 , length_2:36940.11553 , length_3:36941.08123             num_True:4  ,            lap_time:2758.41628
+i: 85, length:36934.80343 , length_2:36939.71804 , length_3:36940.11553             num_True:9  ,            lap_time:2794.98859
+i: 86, length:36934.80343 , length_2:36939.71804 , length_3:36940.11553             num_True:10 ,            lap_time:2832.30916
+i: 87, length:36926.01663 , length_2:36929.63429 , length_3:36931.32873             num_True:6  ,            lap_time:2864.75828
+i: 88, length:36908.44304 , length_2:36908.91194 , length_3:36910.95384             num_True:1  ,            lap_time:2896.79431
+i: 89, length:36905.00396 , length_2:36908.44304 , length_3:36908.91194             num_True:5  ,            lap_time:2931.27058
+i: 90, length:36847.89724 , length_2:36884.08473 , length_3:36888.20759             num_True:4  ,            lap_time:2967.35198
+i: 91, length:36624.17798 , length_2:36841.78263 , length_3:36847.17023             num_True:6  ,            lap_time:3001.39171
+i: 92, length:36599.89683 , length_2:36605.87202 , length_3:36606.30792             num_True:2  ,            lap_time:3036.75693
+i: 93, length:36599.52235 , length_2:36599.89683 , length_3:36605.87202             num_True:5  ,            lap_time:3072.76263
+i: 94, length:36590.70474 , length_2:36593.14418 , length_3:36594.17798             num_True:2  ,            lap_time:3101.87402
+i: 95, length:36581.325   , length_2:36582.64495 , length_3:36583.69138             num_True:3  ,            lap_time:3137.71941
+i: 96, length:36564.01271 , length_2:36570.25857 , length_3:36573.85815             num_True:6  ,            lap_time:3174.67117
+i: 97, length:36562.95832 , length_2:36563.75141 , length_3:36564.01271             num_True:7  ,            lap_time:3207.00293
+i: 98, length:36555.72121 , length_2:36562.95832 , length_3:36563.75141             num_True:5  ,            lap_time:3234.02204
+i: 99, length:36543.03456 , length_2:36550.59799 , length_3:36554.92941             num_True:4  ,            lap_time:3260.12286
+i:100, length:36540.35441 , length_2:36543.03456 , length_3:36546.67417             num_True:4  ,            lap_time:3288.97434
+i:101, length:36540.35441 , length_2:36543.03456 , length_3:36543.15537             num_True:7  ,            lap_time:3318.47901
+i:102, length:36500.2007  , length_2:36510.38285 , length_3:36512.62711             num_True:6  ,            lap_time:3347.92100
+i:103, length:36487.04729 , length_2:36487.77429 , length_3:36491.4139              num_True:7  ,            lap_time:3376.14659
+i:104, length:36487.04729 , length_2:36487.77429 , length_3:36491.4139              num_True:8  ,            lap_time:3405.56002
+i:105, length:36483.35411 , length_2:36487.04729 , length_3:36487.77429             num_True:6  ,            lap_time:3432.12842
+i:106, length:36483.35411 , length_2:36487.04729 , length_3:36487.63486             num_True:7  ,            lap_time:3461.39309
+i:107, length:36483.35411 , length_2:36485.96954 , length_3:36487.04729             num_True:8  ,            lap_time:3491.51095
+i:108, length:36481.52025 , length_2:36483.35411 , length_3:36485.96954             num_True:9  ,            lap_time:3520.02411
+i:109, length:36475.04108 , length_2:36479.85493 , length_3:36481.52025             num_True:6  ,            lap_time:3549.08930
+i:110, length:36452.0166  , length_2:36472.70264 , length_3:36473.88355             num_True:2  ,            lap_time:3577.87242
+i:111, length:36443.2298  , length_2:36449.34442 , length_3:36452.0166              num_True:9  ,            lap_time:3605.86819
+i:112, length:36442.95391 , length_2:36443.2298  , length_3:36444.35723             num_True:7  ,            lap_time:3634.31956
+i:113, length:36430.5275  , length_2:36432.89825 , length_3:36439.3143              num_True:8  ,            lap_time:3662.94095
+i:114, length:36430.5275  , length_2:36432.89825 , length_3:36439.3143              num_True:8  ,            lap_time:3691.75433
+i:115, length:36417.37408 , length_2:36418.10109 , length_3:36425.81621             num_True:6  ,            lap_time:3715.95859
+i:116, length:36417.01279 , length_2:36417.37408 , length_3:36418.10109             num_True:8  ,            lap_time:3744.38005
+i:117, length:36394.83216 , length_2:36397.18629 , length_3:36398.05984             num_True:6  ,            lap_time:3772.75156
+i:118, length:36385.63343 , length_2:36394.83216 , length_3:36397.18629             num_True:7  ,            lap_time:3799.50222
+i:119, length:36377.07364 , length_2:36385.63343 , length_3:36391.19255             num_True:5  ,            lap_time:3823.87321
+i:120, length:36360.19651 , length_2:36368.64814 , length_3:36377.07364             num_True:7  ,            lap_time:3852.51393
+i:121, length:36360.19651 , length_2:36368.64814 , length_3:36376.52382             num_True:9  ,            lap_time:3880.40477
+i:122, length:36359.22908 , length_2:36359.86134 , length_3:36360.19651             num_True:7  ,            lap_time:3909.55254
+i:123, length:36357.19803 , length_2:36359.22908 , length_3:36359.30287             num_True:8  ,            lap_time:3939.74837
+i:124, length:36354.88269 , length_2:36357.19803 , length_3:36359.22908             num_True:9  ,            lap_time:3969.09205
+i:125, length:36348.89905 , length_2:36354.88269 , length_3:36356.63069             num_True:9  ,            lap_time:3997.54102
+i:126, length:36327.65503 , length_2:36330.08763 , length_3:36336.47264             num_True:5  ,            lap_time:4026.50251
+i:127, length:36324.16461 , length_2:36327.46761 , length_3:36327.65503             num_True:6  ,            lap_time:4055.03544
+i:128, length:36321.59731 , length_2:36324.16461 , length_3:36326.60506             num_True:6  ,            lap_time:4083.80543
+i:129, length:36321.59731 , length_2:36324.16461 , length_3:36326.60506             num_True:8  ,            lap_time:4113.73043
+i:130, length:36319.12798 , length_2:36319.67961 , length_3:36321.59731             num_True:7  ,            lap_time:4142.57525
+i:131, length:36275.72383 , length_2:36315.0412  , length_3:36318.11474             num_True:4  ,            lap_time:4169.86946
+i:132, length:36275.72383 , length_2:36288.15024 , length_3:36288.9362              num_True:10 ,            lap_time:4199.89851
+i:133, length:36275.72383 , length_2:36284.51063 , length_3:36288.15024             num_True:7  ,            lap_time:4223.38397
+i:134, length:36275.72383 , length_2:36279.46737 , length_3:36282.77037             num_True:7  ,            lap_time:4251.77701
+i:135, length:36218.39601 , length_2:36269.60921 , length_3:36275.72383             num_True:6  ,            lap_time:4280.20389
+i:136, length:36218.39601 , length_2:36239.00146 , length_3:36242.65139             num_True:5  ,            lap_time:4308.51986
+i:137, length:36214.74608 , length_2:36218.39601 , length_3:36223.32467             num_True:8  ,            lap_time:4337.98140
+i:138, length:36214.74608 , length_2:36218.39601 , length_3:36222.28659             num_True:9  ,            lap_time:4366.95902
+i:139, length:36212.2814  , length_2:36214.74608 , length_3:36218.39601             num_True:6  ,            lap_time:4392.50845
+i:140, length:36203.46379 , length_2:36209.5784  , length_3:36212.2814              num_True:7  ,            lap_time:4422.08375
+i:141, length:36203.46379 , length_2:36203.4946  , length_3:36209.5784              num_True:8  ,            lap_time:4450.55194
+i:142, length:36203.46379 , length_2:36203.4946  , length_3:36204.30499             num_True:5  ,            lap_time:4496.11141
+i:143, length:36203.46379 , length_2:36203.4946  , length_3:36204.30499             num_True:10 ,            lap_time:4547.96161
+i:144, length:36203.46379 , length_2:36203.4946  , length_3:36204.30499             num_True:9  ,            lap_time:4617.12699
+i:145, length:36203.46379 , length_2:36203.4946  , length_3:36204.30499             num_True:10 ,            lap_time:4683.76291
+i:146, length:36186.11649 , length_2:36203.45446 , length_3:36203.46379             num_True:7  ,            lap_time:4756.82665
+i:147, length:36162.09167 , length_2:36174.51808 , length_3:36180.63269             num_True:7  ,            lap_time:4828.41841
+i:148, length:36162.09167 , length_2:36174.51808 , length_3:36177.231               num_True:8  ,            lap_time:4887.58181
+i:149, length:36162.09167 , length_2:36163.0591  , length_3:36169.17371             num_True:8  ,            lap_time:4958.58941
+i:150, length:36151.41519 , length_2:36158.31263 , length_3:36159.29038             num_True:6  ,            lap_time:5021.11540
+i:151, length:36151.41519 , length_2:36157.5298  , length_3:36157.6549              num_True:9  ,            lap_time:5093.68785
+i:152, length:36147.77558 , length_2:36151.41519 , length_3:36157.5298              num_True:8  ,            lap_time:5156.02701
+i:153, length:36138.98878 , length_2:36146.86397 , length_3:36147.2997              num_True:7  ,            lap_time:5223.17301
+i:154, length:36138.98878 , length_2:36141.18509 , length_3:36144.92399             num_True:6  ,            lap_time:5277.89650
+i:155, length:36138.98878 , length_2:36141.18509 , length_3:36144.92399             num_True:10 ,            lap_time:5319.66209
+i:156, length:36130.20199 , length_2:36138.98878 , length_3:36140.90685             num_True:7  ,            lap_time:5362.78784
+i:157, length:36122.36583 , length_2:36128.48044 , length_3:36130.20199             num_True:6  ,            lap_time:5404.85317
+i:158, length:36084.96163 , length_2:36122.36583 , length_3:36128.48044             num_True:8  ,            lap_time:5442.02148
+i:159, length:36084.96163 , length_2:36088.60124 , length_3:36090.13449             num_True:8  ,            lap_time:5487.01331
+i:160, length:36082.28944 , length_2:36084.96163 , length_3:36088.60124             num_True:6  ,            lap_time:5532.18037
+i:161, length:36082.28944 , length_2:36084.96163 , length_3:36085.2581              num_True:7  ,            lap_time:5576.30836
+i:162, length:36074.88742 , length_2:36076.17483 , length_3:36082.28944             num_True:7  ,            lap_time:5613.28426
+i:163, length:36063.42844 , length_2:36065.1332  , length_3:36070.51048             num_True:6  ,            lap_time:5654.61236
+i:164, length:36051.3919  , length_2:36057.31383 , length_3:36058.23872             num_True:4  ,            lap_time:5697.97610
+i:165, length:36050.10338 , length_2:36051.00203 , length_3:36051.3919              num_True:3  ,            lap_time:5741.22040
+i:166, length:36034.02635 , length_2:36047.76967 , length_3:36050.10338             num_True:7  ,            lap_time:5783.41297
+i:167, length:36010.08849 , length_2:36013.26115 , length_3:36033.43876             num_True:2  ,            lap_time:5826.25767
+i:168, length:35985.8331  , length_2:35985.83311 , length_3:35989.00577             num_True:5  ,            lap_time:5869.58766
+i:169, length:35985.8331  , length_2:35985.83311 , length_3:35985.98262             num_True:7  ,            lap_time:5913.40081
+i:170, length:35976.2284  , length_2:35979.86801 , length_3:35985.8331              num_True:7  ,            lap_time:5954.17860
+i:171, length:35976.2284  , length_2:35977.61511 , length_3:35979.7185              num_True:7  ,            lap_time:5996.96598
+i:172, length:35973.55622 , length_2:35976.2284  , length_3:35977.61511             num_True:7  ,            lap_time:6039.84331
+i:173, length:35963.80199 , length_2:35973.55622 , length_3:35976.2284              num_True:9  ,            lap_time:6083.05677
+i:174, length:35963.80199 , length_2:35966.47418 , length_3:35970.21308             num_True:9  ,            lap_time:6125.73094
+i:175, length:35957.49019 , length_2:35963.80199 , length_3:35966.47418             num_True:7  ,            lap_time:6166.64775
+i:176, length:35957.49019 , length_2:35963.62686 , length_3:35963.80199             num_True:10 ,            lap_time:6205.43193
+i:177, length:35955.01519 , length_2:35957.49019 , length_3:35962.99161             num_True:7  ,            lap_time:6246.22814
+i:178, length:35938.5299  , length_2:35939.63676 , length_3:35944.64451             num_True:8  ,            lap_time:6290.04518
+i:179, length:35928.79423 , length_2:35937.63125 , length_3:35938.5299              num_True:6  ,            lap_time:6333.64106
+i:180, length:35928.79423 , length_2:35937.58103 , length_3:35937.63125             num_True:7  ,            lap_time:6375.61495
+i:181, length:35928.79423 , length_2:35937.58103 , length_3:35937.63125             num_True:8  ,            lap_time:6419.09397
+i:182, length:35911.41029 , length_2:35928.79423 , length_3:35931.65607             num_True:7  ,            lap_time:6455.60120
+i:183, length:35911.41029 , length_2:35923.8367  , length_3:35925.05533             num_True:8  ,            lap_time:6498.30034
+i:184, length:35911.41029 , length_2:35915.65208 , length_3:35916.62983             num_True:6  ,            lap_time:6533.55011
+i:185, length:35911.41029 , length_2:35915.65208 , length_3:35916.62983             num_True:9  ,            lap_time:6573.79997
+i:186, length:35911.41029 , length_2:35915.65208 , length_3:35916.43661             num_True:7  ,            lap_time:6610.11949
+i:187, length:35911.41029 , length_2:35915.65208 , length_3:35916.43661             num_True:10 ,            lap_time:6654.16980
+i:188, length:35898.98388 , length_2:35904.20342 , length_3:35907.77068             num_True:5  ,            lap_time:6694.29289
+i:189, length:35898.98388 , length_2:35904.20342 , length_3:35907.77068             num_True:9  ,            lap_time:6736.00220
+i:190, length:35898.98388 , length_2:35904.20342 , length_3:35905.09849             num_True:10 ,            lap_time:6775.89488
+i:191, length:35895.59501 , length_2:35898.98388 , length_3:35899.96163             num_True:10 ,            lap_time:6820.59471
+i:192, length:35895.59501 , length_2:35898.98388 , length_3:35899.96163             num_True:9  ,            lap_time:6866.00840
+i:193, length:35895.59501 , length_2:35898.98388 , length_3:35899.96163             num_True:10 ,            lap_time:6910.13227
+i:194, length:35895.59501 , length_2:35898.98388 , length_3:35899.96163             num_True:9  ,            lap_time:6954.26250
+i:195, length:35895.59501 , length_2:35898.98388 , length_3:35899.96163             num_True:9  ,            lap_time:6997.02331
+i:196, length:35891.95539 , length_2:35895.59501 , length_3:35898.62441             num_True:8  ,            lap_time:7040.46676
+i:197, length:35891.65947 , length_2:35891.95539 , length_3:35895.59501             num_True:9  ,            lap_time:7084.84219
+i:198, length:35879.52898 , length_2:35891.65947 , length_3:35891.95539             num_True:8  ,            lap_time:7124.40028
+i:199, length:35879.52898 , length_2:35883.1686  , length_3:35891.65947             num_True:9  ,            lap_time:7167.76512
