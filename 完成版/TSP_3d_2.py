@@ -292,8 +292,8 @@ if __name__ == '__main__':
     # file_path = 'TSPlib/d1655.tsp'
     # file_path = 'TSPlib/pcb3038.tsp'
     # file_path = 'TSPlib/st70.tsp'
-    # file_path = 'TSPlib/lin318.tsp'
-    file_path = 'TSPlib/p654.tsp'
+    file_path = 'TSPlib/lin318.tsp'
+    # file_path = 'TSPlib/p654.tsp'
 
     cities = read_tsp_file(file_path)
     dist = cal_dist(cities) # 全てのエッジの距離が入った二次元配列
